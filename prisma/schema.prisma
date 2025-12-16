@@ -1,14 +1,422 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// 1. Country (Страна) - один ко многим с City
+model Country {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  code      String   @unique @db.VarChar(2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cities City[]
+
+  @@map("countries")
+}
+
+// 2. City (Город) - многие к одному с Country, один ко многим с Address
+model City {
+  id        String   @id @default(cuid())
+  name      String
+  countryId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  country   Country   @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  addresses Address[]
+
+  @@index([countryId])
+  @@map("cities")
+}
+
+// 3. Address (Адрес) - многие к одному с City, один к одному с Hotel
+model Address {
+  id         String   @id @default(cuid())
+  street     String
+  building   String
+  postalCode String?
+  cityId     String
+  latitude   Float?
+  longitude  Float?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  city  City   @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  hotel Hotel?
+
+  @@index([cityId])
+  @@map("addresses")
+}
+
+// 4. Hotel (Отель) - один к одному с Address, один ко многим с Room, Review, HotelImage, HotelAmenity
+model Hotel {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?  @db.Text
+  stars        Int      @default(3)
+  phone        String?
+  email        String?
+  addressId    String   @unique
+  checkInTime  String   @default("14:00")
+  checkOutTime String   @default("12:00")
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  address        Address        @relation(fields: [addressId], references: [id], onDelete: Cascade)
+  rooms          Room[]
+  reviews        Review[]
+  hotelImages    HotelImage[]
+  hotelAmenities HotelAmenity[]
+
+  @@index([isActive])
+  @@map("hotels")
+}
+
+// 5. User (Пользователь) - один ко многим с Booking, Review, Notification
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  phone        String?
+  dateOfBirth  DateTime?
+  role         UserRole  @default(CUSTOMER)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  bookings      Booking[]
+  reviews       Review[]
+  notifications Notification[]
+
+  @@index([email])
+  @@map("users")
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  MANAGER
+}
+
+// 6. RoomType (Тип номера) - один ко многим с Room
+model RoomType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?  @db.Text
+  maxGuests   Int      @default(2)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  rooms Room[]
+
+  @@map("room_types")
+}
+
+// 7. Room (Номер) - многие к одному с Hotel и RoomType, один ко многим с Booking, RoomImage, RoomAmenity
+model Room {
+  id            String   @id @default(cuid())
+  number        String
+  hotelId       String
+  roomTypeId    String
+  floor         Int
+  size          Float?
+  pricePerNight Decimal  @db.Decimal(10, 2)
+  isAvailable   Boolean  @default(true)
+  description   String?  @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  hotel         Hotel         @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  roomType      RoomType      @relation(fields: [roomTypeId], references: [id])
+  bookings      Booking[]
+  roomImages    RoomImage[]
+  roomAmenities RoomAmenity[]
+
+  @@unique([hotelId, number])
+  @@index([hotelId])
+  @@index([roomTypeId])
+  @@index([isAvailable])
+  @@map("rooms")
+}
+
+// 8. Amenity (Удобство) - многие ко многим через HotelAmenity и RoomAmenity
+model Amenity {
+  id          String          @id @default(cuid())
+  name        String          @unique
+  description String?
+  icon        String?
+  category    AmenityCategory @default(GENERAL)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  hotelAmenities HotelAmenity[]
+  roomAmenities  RoomAmenity[]
+
+  @@map("amenities")
+}
+
+enum AmenityCategory {
+  GENERAL
+  BATHROOM
+  BEDROOM
+  ENTERTAINMENT
+  FOOD_DRINK
+  INTERNET
+  SERVICES
+}
+
+// 9. HotelAmenity (Связь многие ко многим: Hotel ↔ Amenity)
+model HotelAmenity {
+  id        String   @id @default(cuid())
+  hotelId   String
+  amenityId String
+  createdAt DateTime @default(now())
+
+  hotel   Hotel   @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  amenity Amenity @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@unique([hotelId, amenityId])
+  @@index([hotelId])
+  @@index([amenityId])
+  @@map("hotel_amenities")
+}
+
+// 10. RoomAmenity (Связь многие ко многим: Room ↔ Amenity)
+model RoomAmenity {
+  id        String   @id @default(cuid())
+  roomId    String
+  amenityId String
+  createdAt DateTime @default(now())
+
+  room    Room    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  amenity Amenity @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, amenityId])
+  @@index([roomId])
+  @@index([amenityId])
+  @@map("room_amenities")
+}
+
+// 11. Booking (Бронирование) - многие к одному с User, Room, BookingStatus, Discount; один ко многим с Payment, BookingGuest
+model Booking {
+  id              String   @id @default(cuid())
+  userId          String
+  roomId          String
+  bookingStatusId String
+  discountId      String?
+  checkInDate     DateTime
+  checkOutDate    DateTime
+  totalPrice      Decimal  @db.Decimal(10, 2)
+  finalPrice      Decimal  @db.Decimal(10, 2)
+  numberOfGuests  Int      @default(1)
+  specialRequests String?  @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user          User           @relation(fields: [userId], references: [id])
+  room          Room           @relation(fields: [roomId], references: [id])
+  bookingStatus BookingStatus  @relation(fields: [bookingStatusId], references: [id])
+  discount      Discount?      @relation(fields: [discountId], references: [id])
+  payments      Payment[]
+  bookingGuests BookingGuest[]
+
+  @@index([userId])
+  @@index([roomId])
+  @@index([bookingStatusId])
+  @@index([checkInDate, checkOutDate])
+  @@map("bookings")
+}
+
+// 12. BookingGuest (Гости бронирования) - многие к одному с Booking
+model BookingGuest {
+  id             String    @id @default(cuid())
+  bookingId      String
+  firstName      String
+  lastName       String
+  dateOfBirth    DateTime?
+  documentType   String?
+  documentNumber String?
+  createdAt      DateTime  @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@map("booking_guests")
+}
+
+// 13. BookingStatus (Статус бронирования) - один ко многим с Booking
+model BookingStatus {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  color       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookings Booking[]
+
+  @@map("booking_statuses")
+}
+
+// 14. PaymentMethod (Способ оплаты) - один ко многим с Payment
+model PaymentMethod {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  payments Payment[]
+
+  @@map("payment_methods")
+}
+
+// 15. Payment (Платеж) - многие к одному с Booking и PaymentMethod
+model Payment {
+  id              String        @id @default(cuid())
+  bookingId       String
+  paymentMethodId String
+  amount          Decimal       @db.Decimal(10, 2)
+  status          PaymentStatus @default(PENDING)
+  transactionId   String?       @unique
+  paidAt          DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  booking       Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+
+  @@index([bookingId])
+  @@index([paymentMethodId])
+  @@index([status])
+  @@map("payments")
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// 16. Review (Отзыв) - многие к одному с User и Hotel
+model Review {
+  id         String   @id @default(cuid())
+  userId     String
+  hotelId    String
+  rating     Int
+  title      String?
+  comment    String?  @db.Text
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([hotelId])
+  @@index([rating])
+  @@map("reviews")
+}
+
+// 17. Discount (Скидка) - один ко многим с Booking
+model Discount {
+  id          String       @id @default(cuid())
+  code        String       @unique
+  description String?
+  type        DiscountType @default(PERCENTAGE)
+  value       Decimal      @db.Decimal(10, 2)
+  validFrom   DateTime
+  validUntil  DateTime
+  isActive    Boolean      @default(true)
+  maxUses     Int?
+  usedCount   Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  bookings Booking[]
+
+  @@index([code])
+  @@index([isActive, validFrom, validUntil])
+  @@map("discounts")
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED_AMOUNT
+}
+
+// 18. HotelImage (Изображения отеля) - многие к одному с Hotel
+model HotelImage {
+  id           String   @id @default(cuid())
+  hotelId      String
+  url          String
+  caption      String?
+  isPrimary    Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  @@index([hotelId])
+  @@map("hotel_images")
+}
+
+// 19. RoomImage (Изображения номера) - многие к одному с Room
+model RoomImage {
+  id           String   @id @default(cuid())
+  roomId       String
+  url          String
+  caption      String?
+  isPrimary    Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([roomId])
+  @@map("room_images")
+}
+
+// 20. Notification (Уведомления) - многие к одному с User
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType @default(INFO)
+  title     String
+  message   String           @db.Text
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@map("notifications")
+}
+
+enum NotificationType {
+  INFO
+  BOOKING_CONFIRMATION
+  PAYMENT_SUCCESS
+  PAYMENT_FAILED
+  CANCELLATION
+  REMINDER
 }
