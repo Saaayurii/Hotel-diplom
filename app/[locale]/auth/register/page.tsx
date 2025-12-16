@@ -3,9 +3,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { Input } from '@/app/components/ui/Input';
 import { Button } from '@/app/components/ui/Button';
 import { Logo } from '@/app/components/ui/Logo';
+import { LanguageSwitcher } from '@/app/components/ui/LanguageSwitcher';
 
 interface RegisterFormData {
   firstName: string;
@@ -21,6 +23,8 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterFormData>();
   const password = watch('password');
+  const t = useTranslations('auth.register');
+  const locale = useLocale();
 
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
@@ -44,8 +48,7 @@ export default function RegisterPage() {
         return;
       }
 
-      // Redirect to home page after successful registration
-      window.location.href = '/';
+      window.location.href = `/${locale}`;
     } catch (error) {
       console.error('Registration error:', error);
       alert('An error occurred during registration');
@@ -56,26 +59,26 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Правая часть - форма регистрации */}
       <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
         <div className="w-full max-w-md">
-          {/* Логотип */}
+          <div className="absolute top-6 right-6">
+            <LanguageSwitcher />
+          </div>
+
           <div className="mb-12">
             <Logo />
           </div>
 
-          {/* Заголовок */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-serif text-black mb-2">Join Us</h2>
-            <p className="text-gray-600">Create your account to start your journey</p>
+            <h2 className="text-3xl font-serif text-black mb-2">{t('title')}</h2>
+            <p className="text-gray-600">{t('subtitle')}</p>
           </div>
 
-          {/* Форма */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="grid grid-cols-2 gap-4">
               <Input
                 type="text"
-                label="FIRST NAME"
+                label={t('firstName')}
                 placeholder="John"
                 {...register('firstName', {
                   required: 'First name is required',
@@ -89,7 +92,7 @@ export default function RegisterPage() {
 
               <Input
                 type="text"
-                label="LAST NAME"
+                label={t('lastName')}
                 placeholder="Doe"
                 {...register('lastName', {
                   required: 'Last name is required',
@@ -104,7 +107,7 @@ export default function RegisterPage() {
 
             <Input
               type="email"
-              label="EMAIL"
+              label={t('email')}
               placeholder="your@email.com"
               {...register('email', {
                 required: 'Email is required',
@@ -118,7 +121,7 @@ export default function RegisterPage() {
 
             <Input
               type="tel"
-              label="PHONE"
+              label={t('phone')}
               placeholder="+1 (555) 000-0000"
               {...register('phone', {
                 required: 'Phone number is required',
@@ -132,7 +135,7 @@ export default function RegisterPage() {
 
             <Input
               type="password"
-              label="PASSWORD"
+              label={t('password')}
               placeholder="Minimum 6 characters"
               {...register('password', {
                 required: 'Password is required',
@@ -146,7 +149,7 @@ export default function RegisterPage() {
 
             <Input
               type="password"
-              label="CONFIRM PASSWORD"
+              label={t('confirmPassword')}
               placeholder="Re-enter your password"
               {...register('confirmPassword', {
                 required: 'Please confirm your password',
@@ -166,19 +169,19 @@ export default function RegisterPage() {
                   })}
                 />
                 <span>
-                  I agree to the{' '}
+                  {t('acceptTerms')}{' '}
                   <Link
-                    href="/terms"
+                    href={`/${locale}/terms`}
                     className="text-[#C9A56B] hover:text-black transition-colors"
                   >
-                    Terms & Conditions
+                    {t('termsAndConditions')}
                   </Link>{' '}
-                  and{' '}
+                  {t('and')}{' '}
                   <Link
-                    href="/privacy"
+                    href={`/${locale}/privacy`}
                     className="text-[#C9A56B] hover:text-black transition-colors"
                   >
-                    Privacy Policy
+                    {t('privacyPolicy')}
                   </Link>
                 </span>
               </label>
@@ -195,11 +198,10 @@ export default function RegisterPage() {
               fullWidth
               isLoading={isLoading}
             >
-              Create Account
+              {t('createAccount')}
             </Button>
           </form>
 
-          {/* Разделитель */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300" />
@@ -209,31 +211,27 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          {/* Вход */}
           <div className="text-center">
             <p className="text-gray-600">
-              Already have an account?{' '}
+              {t('haveAccount')}{' '}
               <Link
-                href="/auth/login"
+                href={`/${locale}/auth/login`}
                 className="text-[#C9A56B] hover:text-black font-medium transition-colors"
               >
-                Sign in here
+                {t('signInHere')}
               </Link>
             </p>
           </div>
 
-          {/* Декоративная линия внизу */}
           <div className="mt-8 pt-8 border-t border-gray-200">
             <p className="text-center text-xs text-gray-500 tracking-wider">
-              START YOUR ADVENTURE TODAY
+              {t('tagline')}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Декоративный правый блок */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#F5F3F0] relative overflow-hidden">
-        {/* Фоновая сетка */}
         <div className="absolute inset-0 opacity-20">
           <div
             className="w-full h-full"
@@ -247,14 +245,11 @@ export default function RegisterPage() {
           />
         </div>
 
-        {/* Декоративные элементы */}
         <div className="absolute top-20 left-20 w-32 h-32 border-l-2 border-t-2 border-[#C9A56B]" />
         <div className="absolute bottom-20 right-20 w-32 h-32 border-r-2 border-b-2 border-[#C9A56B]" />
 
-        {/* Карта */}
         <div className="absolute top-1/4 right-20 opacity-40">
           <svg width="300" height="300" viewBox="0 0 300 300" fill="none">
-            {/* Упрощенная карта Европы */}
             <path
               d="M150 100 L180 120 L190 140 L180 160 L190 180 L170 200 L150 190 L130 200 L110 180 L120 160 L110 140 L120 120 Z"
               stroke="#C9A56B"
@@ -265,7 +260,6 @@ export default function RegisterPage() {
           </svg>
         </div>
 
-        {/* Текстовый контент */}
         <div className="relative z-10 flex flex-col justify-center px-20">
           <h2 className="text-5xl font-serif text-black leading-tight mb-6">
             ARE YOU<br />
