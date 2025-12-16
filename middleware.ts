@@ -11,6 +11,13 @@ const intlMiddleware = createMiddleware({
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Skip middleware for API routes
+  if (pathname.startsWith('/api/')) {
+    console.log('Middleware - skipping API route:', pathname);
+    return NextResponse.next();
+  }
+
   const token = request.cookies.get('token')?.value;
 
   console.log('Middleware - pathname:', pathname);
@@ -49,5 +56,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(ru|en)/:path*', '/((?!_next|_vercel|.*\\..*).*)'],
+  matcher: [
+    '/((?!api|_next|_vercel|.*\\..*).*)',
+  ],
 };

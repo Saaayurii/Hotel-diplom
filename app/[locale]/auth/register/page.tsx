@@ -8,6 +8,7 @@ import { Input } from '@/app/components/ui/Input';
 import { Button } from '@/app/components/ui/Button';
 import { Logo } from '@/app/components/ui/Logo';
 import { LanguageSwitcher } from '@/app/components/ui/LanguageSwitcher';
+import { ThemeSwitcher } from '@/app/components/ui/ThemeSwitcher';
 
 interface RegisterFormData {
   firstName: string;
@@ -58,12 +59,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col">
+      {/* Header with language and theme switchers */}
+      <div className="absolute top-6 right-6 z-50 flex items-center gap-3">
+        <ThemeSwitcher />
+        <LanguageSwitcher />
+      </div>
+
+      <div className="flex flex-1">
       <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
         <div className="w-full max-w-md">
-          <div className="absolute top-6 right-6">
-            <LanguageSwitcher />
-          </div>
 
           <div className="mb-12">
             <Logo />
@@ -289,6 +294,7 @@ export default function RegisterPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

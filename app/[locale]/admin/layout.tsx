@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import {
   LayoutDashboard,
   Hotel,
@@ -16,26 +17,30 @@ import {
   X,
 } from 'lucide-react';
 import { Logo } from '@/app/components/ui/Logo';
-
-const menuItems = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/hotels', label: 'Hotels', icon: Hotel },
-  { href: '/admin/rooms', label: 'Rooms', icon: Bed },
-  { href: '/admin/bookings', label: 'Bookings', icon: Calendar },
-  { href: '/admin/users', label: 'Users', icon: Users },
-  { href: '/admin/reviews', label: 'Reviews', icon: MessageSquare },
-  { href: '/admin/discounts', label: 'Discounts', icon: Tag },
-];
+import { LanguageSwitcher } from '@/app/components/ui/LanguageSwitcher';
+import { ThemeSwitcher } from '@/app/components/ui/ThemeSwitcher';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations('admin.sidebar');
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
+
+  const menuItems = [
+    { href: `/${locale}/admin`, label: t('dashboard'), icon: LayoutDashboard },
+    { href: `/${locale}/admin/hotels`, label: t('hotels'), icon: Hotel },
+    { href: `/${locale}/admin/rooms`, label: t('rooms'), icon: Bed },
+    { href: `/${locale}/admin/bookings`, label: t('bookings'), icon: Calendar },
+    { href: `/${locale}/admin/users`, label: t('users'), icon: Users },
+    { href: `/${locale}/admin/reviews`, label: t('reviews'), icon: MessageSquare },
+    { href: `/${locale}/admin/discounts`, label: t('discounts'), icon: Tag },
+  ];
 
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/auth/login');
+      router.push(`/${locale}/auth/login`);
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -47,12 +52,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between">
           <Logo />
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-lg hover:bg-gray-100"
-          >
-            {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeSwitcher />
+            <LanguageSwitcher />
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="p-2 rounded-lg hover:bg-gray-100"
+            >
+              {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -66,6 +75,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Logo */}
           <div className="p-6 border-b border-gray-200 hidden lg:block">
             <Logo />
+            <div className="flex items-center gap-2 mt-4">
+              <ThemeSwitcher />
+              <LanguageSwitcher />
+            </div>
           </div>
 
           {/* Navigation */}
@@ -99,7 +112,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               className="flex items-center gap-3 px-4 py-3 w-full text-red-600 hover:bg-red-50 rounded-lg transition-colors"
             >
               <LogOut size={20} />
-              <span className="font-medium">Logout</span>
+              <span className="font-medium">{t('logout')}</span>
             </button>
           </div>
         </div>

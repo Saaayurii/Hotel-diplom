@@ -8,6 +8,7 @@ import { Input } from '@/app/components/ui/Input';
 import { Button } from '@/app/components/ui/Button';
 import { Logo } from '@/app/components/ui/Logo';
 import { LanguageSwitcher } from '@/app/components/ui/LanguageSwitcher';
+import { ThemeSwitcher } from '@/app/components/ui/ThemeSwitcher';
 
 interface LoginFormData {
   email: string;
@@ -51,7 +52,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col">
+      {/* Header with language and theme switchers */}
+      <div className="absolute top-6 right-6 z-50 flex items-center gap-3">
+        <ThemeSwitcher />
+        <LanguageSwitcher />
+      </div>
+
+      <div className="flex flex-1">
       {/* Decorative left block with grid */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#F5F3F0] relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -105,9 +113,6 @@ export default function LoginPage() {
       {/* Right part - login form */}
       <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
         <div className="w-full max-w-md">
-          <div className="absolute top-6 right-6">
-            <LanguageSwitcher />
-          </div>
 
           <div className="mb-12">
             <Logo />
@@ -200,6 +205,7 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

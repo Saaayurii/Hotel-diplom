@@ -121,6 +121,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors;
+  }
+
+  /* Dark mode support */
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
   }
 }
