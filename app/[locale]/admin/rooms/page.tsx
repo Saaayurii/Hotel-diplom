@@ -1,17 +1,23 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Plus, Edit, Trash2, Hotel as HotelIcon, DollarSign } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
+import { Modal } from '@/app/components/ui/Modal';
+import { RoomForm } from '@/app/components/admin/RoomForm';
+import { TableSkeleton } from '@/app/components/ui/Skeleton';
+import { showSuccessToast, showErrorToast } from '@/app/lib/toast';
 
 interface Room {
   id: string;
   number: string;
+  hotelId: string;
+  roomTypeId: string;
   floor: number;
   size: number | null;
   pricePerNight: string;
   isAvailable: boolean;
+  description?: string;
   hotel: {
     name: string;
   };
@@ -24,6 +30,8 @@ interface Room {
 export default function RoomsPage() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 
   useEffect(() => {
     fetchRooms();
@@ -31,31 +39,64 @@ export default function RoomsPage() {
 
   const fetchRooms = async () => {
     try {
+      setLoading(true);
       const response = await fetch('/api/admin/rooms');
       const data = await response.json();
       setRooms(data);
     } catch (error) {
       console.error('Error fetching rooms:', error);
+      showErrorToast('Failed to load rooms');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this room?')) return;
+  const handleDelete = async (id: string, number: string) => {
+    if (!confirm(`Are you sure you want to delete room "${number}"?`)) return;
 
     try {
-      await fetch(`/api/admin/rooms/${id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/admin/rooms/${id}`, { method: 'DELETE' });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete room');
+      }
+
+      showSuccessToast('Room deleted successfully');
       fetchRooms();
     } catch (error) {
       console.error('Error deleting room:', error);
+      showErrorToast('Failed to delete room');
     }
+  };
+
+  const handleCreate = () => {
+    setSelectedRoom(null);
+    setModalOpen(true);
+  };
+
+  const handleEdit = (room: Room) => {
+    setSelectedRoom(room);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setSelectedRoom(null);
+  };
+
+  const handleSuccess = () => {
+    handleModalClose();
+    fetchRooms();
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A56B]" />
+      <div>
+        <div className="mb-8">
+          <h1 className="text-3xl font-serif text-black mb-2">Rooms Management</h1>
+          <p className="text-gray-600">Manage your hotel rooms</p>
+        </div>
+        <TableSkeleton rows={5} columns={8} />
       </div>
     );
   }
@@ -67,12 +108,10 @@ export default function RoomsPage() {
           <h1 className="text-3xl font-serif text-black mb-2">Rooms Management</h1>
           <p className="text-gray-600">Manage your hotel rooms</p>
         </div>
-        <Link href="/admin/rooms/new">
-          <Button variant="primary">
-            <Plus size={20} className="mr-2" />
-            Add Room
-          </Button>
-        </Link>
+        <Button variant="primary" onClick={handleCreate}>
+          <Plus size={20} className="mr-2" />
+          Add Room
+        </Button>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -162,13 +201,14 @@ export default function RoomsPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
-                        <Link href={`/admin/rooms/${room.id}`}>
-                          <button className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors">
-                            <Edit size={18} />
-                          </button>
-                        </Link>
                         <button
-                          onClick={() => handleDelete(room.id)}
+                          onClick={() => handleEdit(room)}
+                          className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors"
+                        >
+                          <Edit size={18} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(room.id, room.number)}
                           className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         >
                           <Trash2 size={18} />
@@ -182,6 +222,19 @@ export default function RoomsPage() {
           </table>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalOpen}
+        onClose={handleModalClose}
+        title={selectedRoom ? 'Edit Room' : 'Create New Room'}
+        size="lg"
+      >
+        <RoomForm
+          room={selectedRoom}
+          onSuccess={handleSuccess}
+          onCancel={handleModalClose}
+        />
+      </Modal>
     </div>
   );
 }

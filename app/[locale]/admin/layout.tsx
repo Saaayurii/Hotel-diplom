@@ -15,6 +15,12 @@ import {
   LogOut,
   Menu,
   X,
+  Globe,
+  MapPin,
+  DoorOpen,
+  Sparkles,
+  CreditCard,
+  FileText,
 } from 'lucide-react';
 import { Logo } from '@/app/components/ui/Logo';
 import { LanguageSwitcher } from '@/app/components/ui/LanguageSwitcher';
@@ -35,6 +41,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: `/${locale}/admin/users`, label: t('users'), icon: Users },
     { href: `/${locale}/admin/reviews`, label: t('reviews'), icon: MessageSquare },
     { href: `/${locale}/admin/discounts`, label: t('discounts'), icon: Tag },
+    { href: `/${locale}/admin/countries`, label: t('countries'), icon: Globe },
+    { href: `/${locale}/admin/cities`, label: t('cities'), icon: MapPin },
+    { href: `/${locale}/admin/room-types`, label: t('roomTypes'), icon: DoorOpen },
+    { href: `/${locale}/admin/amenities`, label: t('amenities'), icon: Sparkles },
+    { href: `/${locale}/admin/payment-methods`, label: t('paymentMethods'), icon: CreditCard },
+    { href: `/${locale}/admin/booking-statuses`, label: t('bookingStatuses'), icon: FileText },
   ];
 
   const handleLogout = async () => {

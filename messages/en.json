@@ -186,6 +186,7 @@
       "roomTypes": "Room Types",
       "amenities": "Amenities",
       "paymentMethods": "Payment Methods",
+      "bookingStatuses": "Booking Statuses",
       "logout": "Logout"
     },
     "countries": {
@@ -225,7 +226,18 @@
       "subtitle": "Manage payment methods",
       "add": "Add Payment Method",
       "name": "Name",
-      "description": "Description"
+      "description": "Description",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "bookingStatuses": {
+      "title": "Booking Statuses",
+      "subtitle": "Manage booking statuses",
+      "add": "Add Booking Status",
+      "name": "Name",
+      "description": "Description",
+      "color": "Color",
+      "bookings": "Bookings"
     }
   }
 }

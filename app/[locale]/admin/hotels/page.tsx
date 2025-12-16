@@ -1,9 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Plus, Edit, Trash2, MapPin, Star } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
+import { Modal } from '@/app/components/ui/Modal';
+import { HotelForm } from '@/app/components/admin/HotelForm';
+import { TableSkeleton } from '@/app/components/ui/Skeleton';
+import { showSuccessToast, showErrorToast } from '@/app/lib/toast';
 
 interface Hotel {
   id: string;
@@ -13,9 +16,17 @@ interface Hotel {
   phone: string | null;
   email: string | null;
   isActive: boolean;
+  checkInTime: string;
+  checkOutTime: string;
+  addressId: string;
   address: {
+    id: string;
     street: string;
     building: string;
+    postalCode: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    cityId: string;
     city: {
       name: string;
       country: {
@@ -31,6 +42,8 @@ interface Hotel {
 export default function HotelsPage() {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
 
   useEffect(() => {
     fetchHotels();
@@ -38,31 +51,64 @@ export default function HotelsPage() {
 
   const fetchHotels = async () => {
     try {
+      setLoading(true);
       const response = await fetch('/api/admin/hotels');
       const data = await response.json();
       setHotels(data);
     } catch (error) {
       console.error('Error fetching hotels:', error);
+      showErrorToast('Failed to load hotels');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this hotel?')) return;
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
 
     try {
-      await fetch(`/api/admin/hotels/${id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/admin/hotels/${id}`, { method: 'DELETE' });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete hotel');
+      }
+
+      showSuccessToast('Hotel deleted successfully');
       fetchHotels();
     } catch (error) {
       console.error('Error deleting hotel:', error);
+      showErrorToast('Failed to delete hotel');
     }
+  };
+
+  const handleCreate = () => {
+    setSelectedHotel(null);
+    setModalOpen(true);
+  };
+
+  const handleEdit = (hotel: Hotel) => {
+    setSelectedHotel(hotel);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setSelectedHotel(null);
+  };
+
+  const handleSuccess = () => {
+    handleModalClose();
+    fetchHotels();
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A56B]" />
+      <div>
+        <div className="mb-8">
+          <h1 className="text-3xl font-serif text-black mb-2">Hotels Management</h1>
+          <p className="text-gray-600">Manage your hotels and properties</p>
+        </div>
+        <TableSkeleton rows={5} columns={7} />
       </div>
     );
   }
@@ -74,12 +120,10 @@ export default function HotelsPage() {
           <h1 className="text-3xl font-serif text-black mb-2">Hotels Management</h1>
           <p className="text-gray-600">Manage your hotels and properties</p>
         </div>
-        <Link href="/admin/hotels/new">
-          <Button variant="primary">
-            <Plus size={20} className="mr-2" />
-            Add Hotel
-          </Button>
-        </Link>
+        <Button variant="primary" onClick={handleCreate}>
+          <Plus size={20} className="mr-2" />
+          Add Hotel
+        </Button>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -167,13 +211,14 @@ export default function HotelsPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
-                        <Link href={`/admin/hotels/${hotel.id}`}>
-                          <button className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors">
-                            <Edit size={18} />
-                          </button>
-                        </Link>
                         <button
-                          onClick={() => handleDelete(hotel.id)}
+                          onClick={() => handleEdit(hotel)}
+                          className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors"
+                        >
+                          <Edit size={18} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(hotel.id, hotel.name)}
                           className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         >
                           <Trash2 size={18} />
@@ -187,6 +232,19 @@ export default function HotelsPage() {
           </table>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalOpen}
+        onClose={handleModalClose}
+        title={selectedHotel ? 'Edit Hotel' : 'Create New Hotel'}
+        size="lg"
+      >
+        <HotelForm
+          hotel={selectedHotel}
+          onSuccess={handleSuccess}
+          onCancel={handleModalClose}
+        />
+      </Modal>
     </div>
   );
 }

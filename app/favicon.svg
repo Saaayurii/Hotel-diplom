@@ -1,0 +1,39 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="#1F2937"/>
+
+  <!-- Outer compass ring -->
+  <circle cx="32" cy="32" r="26" stroke="#C9A56B" stroke-width="2" fill="none"/>
+
+  <!-- Inner compass ring -->
+  <circle cx="32" cy="32" r="20" stroke="#C9A56B" stroke-width="1" fill="none" opacity="0.5"/>
+
+  <!-- North marker -->
+  <path d="M32 8 L32 14" stroke="#C9A56B" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="32" y="6" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle" fill="#C9A56B">N</text>
+
+  <!-- East marker -->
+  <path d="M56 32 L50 32" stroke="#C9A56B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- South marker -->
+  <path d="M32 56 L32 50" stroke="#C9A56B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- West marker -->
+  <path d="M8 32 L14 32" stroke="#C9A56B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Compass needle - North (lighter gold) -->
+  <path d="M32 12 L36 32 L32 52 L28 32 Z" fill="#C9A56B" opacity="0.9"/>
+
+  <!-- Compass needle - South (darker) -->
+  <path d="M32 52 L28 32 L32 12" fill="#B89560" opacity="0.7"/>
+
+  <!-- Center point -->
+  <circle cx="32" cy="32" r="3" fill="#C9A56B"/>
+  <circle cx="32" cy="32" r="1.5" fill="#1F2937"/>
+
+  <!-- Decorative corner accents -->
+  <path d="M10 10 L14 10 L14 14" stroke="#C9A56B" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M54 10 L50 10 L50 14" stroke="#C9A56B" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M10 54 L14 54 L14 50" stroke="#C9A56B" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M54 54 L50 54 L50 50" stroke="#C9A56B" stroke-width="1" fill="none" opacity="0.3"/>
+</svg>
