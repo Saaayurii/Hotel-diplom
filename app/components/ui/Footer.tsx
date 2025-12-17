@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Logo } from './Logo';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Compass } from 'lucide-react';
 
 export function Footer() {
   const locale = useLocale();
+  const t = useTranslations('Footer');
 
   const footerLinks = {
     company: [
@@ -43,14 +44,14 @@ export function Footer() {
               <Logo />
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 max-w-sm">
-              Experience luxury and comfort with TIMEOUT. Your gateway to unforgettable stays around the world.
+              {t('experienceLuxury')}
             </p>
 
             {/* Decorative Compass */}
             <div className="flex items-center gap-3 mb-6">
               <Compass className="w-8 h-8 text-[#C9A56B]" />
               <p className="text-xs italic text-gray-500 dark:text-gray-500">
-                Adventure time is today
+                {t('adventureTime')}
               </p>
             </div>
 
@@ -174,7 +175,7 @@ export function Footer() {
                 href={`/${locale}/privacy`}
                 className="text-sm text-gray-600 hover:text-[#C9A56B] transition-colors dark:text-gray-400 dark:hover:text-[#C9A56B]"
               >
-                Privacy Policy
+                {t('privacyPolicy')}
               </Link>
               <Link
                 href={`/${locale}/cookies`}
