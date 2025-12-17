@@ -25,6 +25,7 @@ export default function RegisterPage() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterFormData>();
   const password = watch('password');
   const t = useTranslations('auth.register');
+  const commonT = useTranslations('common');
   const locale = useLocale();
 
   const onSubmit = async (data: RegisterFormData) => {
@@ -67,7 +68,7 @@ export default function RegisterPage() {
       </div>
 
       <div className="flex flex-1">
-      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
+      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white dark:bg-gray-900">
         <div className="w-full max-w-md">
 
           <div className="mb-12">
@@ -75,8 +76,8 @@ export default function RegisterPage() {
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-serif text-black mb-2">{t('title')}</h2>
-            <p className="text-gray-600">{t('subtitle')}</p>
+            <h2 className="text-3xl font-serif text-black dark:text-white mb-2">{t('title')}</h2>
+            <p className="text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -165,10 +166,10 @@ export default function RegisterPage() {
             />
 
             <div className="pt-2">
-              <label className="flex items-start text-sm text-gray-600">
+              <label className="flex items-start text-sm text-gray-600 dark:text-gray-400">
                 <input
                   type="checkbox"
-                  className="mr-2 mt-0.5 w-4 h-4 border-gray-300 rounded text-[#C9A56B] focus:ring-[#C9A56B]"
+                  className="mr-2 mt-0.5 w-4 h-4 border-gray-300 dark:border-gray-600 rounded text-[#C9A56B] focus:ring-[#C9A56B] dark:bg-gray-700"
                   {...register('acceptTerms', {
                     required: 'You must accept the terms and conditions',
                   })}
@@ -177,14 +178,14 @@ export default function RegisterPage() {
                   {t('acceptTerms')}{' '}
                   <Link
                     href={`/${locale}/terms`}
-                    className="text-[#C9A56B] hover:text-black transition-colors"
+                    className="text-[#C9A56B] hover:text-black dark:hover:text-white transition-colors"
                   >
                     {t('termsAndConditions')}
                   </Link>{' '}
                   {t('and')}{' '}
                   <Link
                     href={`/${locale}/privacy`}
-                    className="text-[#C9A56B] hover:text-black transition-colors"
+                    className="text-[#C9A56B] hover:text-black dark:hover:text-white transition-colors"
                   >
                     {t('privacyPolicy')}
                   </Link>
@@ -209,34 +210,34 @@ export default function RegisterPage() {
 
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-gray-300 dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">OR</span>
+              <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">OR</span>
             </div>
           </div>
 
           <div className="text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               {t('haveAccount')}{' '}
               <Link
                 href={`/${locale}/auth/login`}
-                className="text-[#C9A56B] hover:text-black font-medium transition-colors"
+                className="text-[#C9A56B] hover:text-black dark:hover:text-white font-medium transition-colors"
               >
                 {t('signInHere')}
               </Link>
             </p>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <p className="text-center text-xs text-gray-500 tracking-wider">
+          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <p className="text-center text-xs text-gray-500 dark:text-gray-400 tracking-wider">
               {t('tagline')}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="hidden lg:flex lg:w-1/2 bg-[#F5F3F0] relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#F5F3F0] dark:bg-gray-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div
             className="w-full h-full"
@@ -266,14 +267,14 @@ export default function RegisterPage() {
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-20">
-          <h2 className="text-5xl font-serif text-black leading-tight mb-6">
+          <h2 className="text-5xl font-serif text-black dark:text-white leading-tight mb-6">
             ARE YOU<br />
             <span className="text-[#C9A56B]">READY?</span>
           </h2>
-          <p className="text-gray-600 italic text-lg font-serif mb-8">
+          <p className="text-gray-600 dark:text-gray-400 italic text-lg font-serif mb-8">
             adventure time is today
           </p>
-          <div className="space-y-4 text-gray-700">
+          <div className="space-y-4 text-gray-700 dark:text-gray-300">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 border-2 border-[#C9A56B] rounded-full flex items-center justify-center">
                 <span className="text-[#C9A56B] font-bold">✓</span>

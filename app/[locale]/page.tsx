@@ -1,9 +1,13 @@
+import { useTranslations } from 'next-intl';
 import { Header } from '../components/ui/Header';
 import { Footer } from '../components/ui/Footer';
 import Link from 'next/link';
-import { Search, Calendar, Users, Star, Shield, Headphones, Award, MapPin, Compass } from 'lucide-react';
+import Image from 'next/image';
+import { Search, Calendar, Users, Star, Shield, Headphones, Award, MapPin, Compass, BedDouble, Wind, Dumbbell, UtensilsCrossed, Quote } from 'lucide-react';
 
 export default function Home() {
+  const t = useTranslations('HomePage');
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -285,158 +289,206 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Popular Destinations Section */}
+        {/* Featured Rooms Section */}
+        <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-950">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                {t('featuredRooms.title')}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {t('featuredRooms.subtitle')}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Room 1 */}
+              <div className="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <div className="relative">
+                  <Image src="/1.jpg" alt="Deluxe Room" width={800} height={600} className="w-full h-64 object-cover" />
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#C9A56B] text-white text-xs font-semibold">
+                    from $299
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    Deluxe Suite
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    A spacious and elegant suite with a king-sized bed, a private balcony, and stunning city views.
+                  </p>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-4">
+                      <span className="flex items-center gap-2"><Users size={16} /> 2 Guests</span>
+                      <span className="flex items-center gap-2"><BedDouble size={16} /> 1 King Bed</span>
+                    </div>
+                    <Link href="/rooms/deluxe-suite" className="font-medium text-[#C9A56B] hover:text-[#B89560]">
+                      Book Now
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Room 2 */}
+              <div className="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <div className="relative">
+                  <Image src="/2.jpg" alt="Ocean View Room" width={800} height={600} className="w-full h-64 object-cover" />
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#C9A56B] text-white text-xs font-semibold">
+                    from $399
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    Ocean View Room
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    Wake up to the sound of waves in this beautiful room with a direct view of the ocean.
+                  </p>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-4">
+                      <span className="flex items-center gap-2"><Users size={16} /> 2 Guests</span>
+                      <span className="flex items-center gap-2"><BedDouble size={16} /> 1 Queen Bed</span>
+                    </div>
+                    <Link href="/rooms/ocean-view" className="font-medium text-[#C9A56B] hover:text-[#B89560]">
+                      Book Now
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Room 3 */}
+              <div className="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <div className="relative">
+                  <Image src="/3.jpg" alt="Family Room" width={800} height={600} className="w-full h-64 object-cover" />
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#C9A56B] text-white text-xs font-semibold">
+                    from $499
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    Family Room
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    Perfect for families, this room offers ample space with multiple beds and a play area.
+                  </p>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-4">
+                      <span className="flex items-center gap-2"><Users size={16} /> 4 Guests</span>
+                      <span className="flex items-center gap-2"><BedDouble size={16} /> 2 Queen Beds</span>
+                    </div>
+                    <Link href="/rooms/family-room" className="font-medium text-[#C9A56B] hover:text-[#B89560]">
+                      Book Now
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mt-12">
+              <Link
+                href="/rooms"
+                className="px-8 py-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 font-medium hover:border-[#C9A56B] hover:text-[#C9A56B] transition-all"
+              >
+                {t('featuredRooms.explore')}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Amenities Section */}
         <section className="py-16 md:py-24 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <span className="inline-block px-4 py-2 rounded-full bg-[#C9A56B]/10 text-[#C9A56B] text-sm font-medium mb-4">
-                POPULAR DESTINATIONS
-              </span>
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Journey Through<br />the Mediterranean
+                {t('amenities.title')}
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-4">
-                Discover exclusive offers and luxury accommodations in the world's most beautiful destinations
-              </p>
-              <p className="text-lg font-semibold text-[#C9A56B]">
-                UP TO 20% OFF
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {t('amenities.subtitle')}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {/* Destination Card 1 */}
-              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/20 dark:to-blue-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="aspect-[4/3] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-300/20" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <MapPin className="w-20 h-20 text-[#C9A56B] opacity-30" />
-                  </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 mb-4">
+                  <Wind className="w-8 h-8 text-blue-500" />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      Greece
-                    </h3>
-                    <span className="px-3 py-1 rounded-full bg-[#C9A56B] text-white text-xs font-semibold">
-                      -20%
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    Experience the beauty of Greek islands with crystal clear waters and ancient history
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                      <span className="text-gray-500 line-through">$299</span>
-                      <span className="ml-2 text-xl font-bold text-[#C9A56B]">$239</span>
-                      <span className="text-gray-600 dark:text-gray-400">/night</span>
-                    </div>
-                    <Link
-                      href="/destinations/greece"
-                      className="text-sm font-medium text-[#C9A56B] hover:text-[#B89560] transition-colors"
-                    >
-                      Explore →
-                    </Link>
-                  </div>
-                </div>
+                <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('amenities.pool')}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('amenities.poolText')}</p>
               </div>
-
-              {/* Destination Card 2 */}
-              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-100 to-orange-50 dark:from-amber-900/20 dark:to-orange-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="aspect-[4/3] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-orange-300/20" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <MapPin className="w-20 h-20 text-[#C9A56B] opacity-30" />
-                  </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-rose-100 dark:bg-rose-900/50 mb-4">
+                  <Star className="w-8 h-8 text-rose-500" />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      Italy
-                    </h3>
-                    <span className="px-3 py-1 rounded-full bg-[#C9A56B] text-white text-xs font-semibold">
-                      -15%
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    Indulge in Italian culture, cuisine, and Renaissance art in historic cities
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                      <span className="text-gray-500 line-through">$349</span>
-                      <span className="ml-2 text-xl font-bold text-[#C9A56B]">$296</span>
-                      <span className="text-gray-600 dark:text-gray-400">/night</span>
-                    </div>
-                    <Link
-                      href="/destinations/italy"
-                      className="text-sm font-medium text-[#C9A56B] hover:text-[#B89560] transition-colors"
-                    >
-                      Explore →
-                    </Link>
-                  </div>
-                </div>
+                <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('amenities.spa')}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('amenities.spaText')}</p>
               </div>
-
-              {/* Destination Card 3 */}
-              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-100 to-pink-50 dark:from-rose-900/20 dark:to-pink-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                <div className="aspect-[4/3] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-rose-400/20 to-pink-300/20" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <MapPin className="w-20 h-20 text-[#C9A56B] opacity-30" />
-                  </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-900/50 mb-4">
+                  <Dumbbell className="w-8 h-8 text-amber-500" />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-serif text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      Spain
-                    </h3>
-                    <span className="px-3 py-1 rounded-full bg-[#C9A56B] text-white text-xs font-semibold">
-                      -20%
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    Discover vibrant culture, stunning beaches, and world-class gastronomy
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                      <span className="text-gray-500 line-through">$279</span>
-                      <span className="ml-2 text-xl font-bold text-[#C9A56B]">$223</span>
-                      <span className="text-gray-600 dark:text-gray-400">/night</span>
-                    </div>
-                    <Link
-                      href="/destinations/spain"
-                      className="text-sm font-medium text-[#C9A56B] hover:text-[#B89560] transition-colors"
-                    >
-                      Explore →
-                    </Link>
-                  </div>
+                <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('amenities.gym')}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('amenities.gymText')}</p>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 mb-4">
+                  <UtensilsCrossed className="w-8 h-8 text-emerald-500" />
                 </div>
+                <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('amenities.restaurant')}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('amenities.restaurantText')}</p>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Special Offer Banner */}
-            <div className="mt-12 max-w-4xl mx-auto">
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#C9A56B]/10 via-[#C9A56B]/5 to-transparent border border-[#C9A56B]/20 p-6 md:p-8">
-                <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-10">
-                  <MapPin className="absolute right-4 top-4 w-16 h-16 text-[#C9A56B]" />
-                  <Compass className="absolute right-12 bottom-4 w-12 h-12 text-[#C9A56B]" />
+        {/* Testimonials Section */}
+        <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-950">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                {t('testimonials.title')}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {t('testimonials.subtitle')}
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
+                <Quote className="w-8 h-8 text-[#C9A56B] mb-4" />
+                <p className="text-gray-600 dark:text-gray-400 mb-6 italic">
+                  "{t('testimonials.testimonial1')}"
+                </p>
+                <div className="flex items-center">
+                  <Image src="/4.jpg" alt="Guest" width={48} height={48} className="w-12 h-12 rounded-full object-cover mr-4" />
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">{t('testimonials.guest1')}</p>
+                    <p className="text-sm text-gray-500">{t('testimonials.location1')}</p>
+                  </div>
                 </div>
-                <div className="relative z-10">
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div>
-                      <p className="text-sm font-medium text-[#C9A56B] mb-2">EXCLUSIVE OFFER</p>
-                      <h3 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                        Book 3 Nights, Get the 4th Free
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        With exclusive amenities and special packages for your budget
-                      </p>
-                    </div>
-                    <Link
-                      href="/offers"
-                      className="flex-shrink-0 px-6 py-3 rounded-lg bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all shadow-lg"
-                    >
-                      View All Offers
-                    </Link>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
+                <Quote className="w-8 h-8 text-[#C9A56B] mb-4" />
+                <p className="text-gray-600 dark:text-gray-400 mb-6 italic">
+                  "{t('testimonials.testimonial2')}"
+                </p>
+                <div className="flex items-center">
+                  <Image src="/5.jpg" alt="Guest" width={48} height={48} className="w-12 h-12 rounded-full object-cover mr-4" />
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">{t('testimonials.guest2')}</p>
+                    <p className="text-sm text-gray-500">{t('testimonials.location2')}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
+                <Quote className="w-8 h-8 text-[#C9A56B] mb-4" />
+                <p className="text-gray-600 dark:text-gray-400 mb-6 italic">
+                  "{t('testimonials.testimonial3')}"
+                </p>
+                <div className="flex items-center">
+                  <Image src="/1.jpg" alt="Guest" width={48} height={48} className="w-12 h-12 rounded-full object-cover mr-4" />
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">{t('testimonials.guest3')}</p>
+                    <p className="text-sm text-gray-500">{t('testimonials.location3')}</p>
                   </div>
                 </div>
               </div>

@@ -61,7 +61,7 @@ export default function LoginPage() {
 
       <div className="flex flex-1">
       {/* Decorative left block with grid */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#F5F3F0] relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#F5F3F0] dark:bg-gray-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div
             className="w-full h-full"
@@ -99,28 +99,37 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-20">
-          <h2 className="text-5xl font-serif text-black leading-tight mb-6">
+          <h2 className="text-5xl font-serif text-black dark:text-white leading-tight mb-6">
             IT'S TIME<br />
             TO EXPLORE<br />
             THE WORLD
           </h2>
-          <p className="text-gray-600 italic text-lg font-serif">
+          <p className="text-gray-600 dark:text-gray-400 italic text-lg font-serif">
             adventure time is today
           </p>
         </div>
       </div>
 
       {/* Right part - login form */}
-      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
+      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white dark:bg-gray-900">
         <div className="w-full max-w-md">
 
-          <div className="mb-12">
+          <div className="flex justify-between items-center mb-12">
+            <Link
+              href={`/${locale}`}
+              className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] transition-colors text-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              {t('common:goBack')}
+            </Link>
             <Logo />
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-serif text-black mb-2">{t('title')}</h2>
-            <p className="text-gray-600">{t('subtitle')}</p>
+            <h2 className="text-3xl font-serif text-black dark:text-white mb-2">{t('title')}</h2>
+            <p className="text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -156,13 +165,13 @@ export default function LoginPage() {
               <label className="flex items-center">
                 <input
                   type="checkbox"
-                  className="mr-2 w-4 h-4 border-gray-300 rounded text-[#C9A56B] focus:ring-[#C9A56B]"
+                  className="mr-2 w-4 h-4 border-gray-300 dark:border-gray-600 rounded text-[#C9A56B] focus:ring-[#C9A56B] dark:bg-gray-700"
                 />
-                <span className="text-gray-600">{t('rememberMe')}</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('rememberMe')}</span>
               </label>
               <Link
                 href={`/${locale}/auth/forgot-password`}
-                className="text-[#C9A56B] hover:text-black transition-colors"
+                className="text-[#C9A56B] hover:text-black dark:hover:text-white transition-colors"
               >
                 {t('forgotPassword')}
               </Link>
@@ -180,27 +189,27 @@ export default function LoginPage() {
 
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-gray-300 dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">OR</span>
+              <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">OR</span>
             </div>
           </div>
 
           <div className="text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               {t('noAccount')}{' '}
               <Link
                 href={`/${locale}/auth/register`}
-                className="text-[#C9A56B] hover:text-black font-medium transition-colors"
+                className="text-[#C9A56B] hover:text-black dark:hover:text-white font-medium transition-colors"
               >
                 {t('createAccount')}
               </Link>
             </p>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <p className="text-center text-xs text-gray-500 tracking-wider">
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <p className="text-center text-xs text-gray-500 dark:text-gray-400 tracking-wider">
               {t('tagline')}
             </p>
           </div>

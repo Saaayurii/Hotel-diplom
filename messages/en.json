@@ -1,4 +1,294 @@
 {
+  "Header": {
+    "home": "Home",
+    "hotels": "Hotels",
+    "rooms": "Rooms",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "Hotels": {
+    "title": "Our Hotels",
+    "subtitle": "Discover luxury accommodations around the world",
+    "searchPlaceholder": "Search by hotel name, city or country...",
+    "filterByStars": "Filter by stars",
+    "allStars": "All Stars",
+    "stars": "stars",
+    "perNight": "/night",
+    "viewDetails": "View Details",
+    "noHotels": "No hotels found",
+    "tryDifferentSearch": "Try adjusting your search or filters",
+    "rooms": "rooms",
+    "location": "Location",
+    "amenities": "Amenities",
+    "featured": "Featured Hotels",
+    "featuredSubtitle": "Handpicked luxury properties for unforgettable experiences",
+    "searchButton": "Search",
+    "stats": {
+      "totalHotels": "Total Hotels",
+      "countries": "Countries",
+      "premium": "Premium Hotels",
+      "satisfaction": "Satisfaction"
+    },
+    "exploreCollection": "Explore Our Collection",
+    "allHotels": "All Hotels",
+    "allHotelsSubtitle": "Browse our complete collection of partner hotels worldwide",
+    "ctaTitle": "Can't find what you're looking for?",
+    "ctaSubtitle": "Contact our team for personalized recommendations and exclusive deals",
+    "ctaButton": "Contact Us"
+  },
+  "Rooms": {
+    "title": "Available Rooms",
+    "subtitle": "Find your perfect accommodation",
+    "searchPlaceholder": "Search by hotel, room type or number...",
+    "filterByType": "Filter by type",
+    "allTypes": "All Types",
+    "perNight": "/night",
+    "viewDetails": "View Details",
+    "noRooms": "No rooms found",
+    "tryDifferentFilters": "Try adjusting your filters",
+    "maxGuests": "Max guests",
+    "floor": "Floor",
+    "size": "Size",
+    "sqm": "sqm",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "bookNow": "Book Now",
+    "premiumRooms": "Premium Rooms",
+    "heroTitle": "Find Your Perfect",
+    "heroTitleHighlight": "Room",
+    "heroSubtitle": "Discover our curated selection of premium rooms designed for comfort and luxury",
+    "totalRooms": "Total Rooms",
+    "availableNow": "Available Now",
+    "roomTypes": "Room Types",
+    "premiumAmenities": "Premium Amenities",
+    "featuresTitle": "Room Features & Amenities",
+    "features": {
+      "wifi": "Free WiFi",
+      "wifiDesc": "High-speed internet",
+      "tv": "Smart TV",
+      "tvDesc": "4K streaming",
+      "ac": "Climate Control",
+      "acDesc": "Individual AC",
+      "bath": "Luxury Bath",
+      "bathDesc": "Premium toiletries",
+      "minibar": "Mini Bar",
+      "minibarDesc": "Refreshments",
+      "room_service": "Room Service",
+      "room_serviceDesc": "24/7 available"
+    },
+    "filters": "Filters",
+    "allAvailability": "All Status",
+    "availableOnly": "Available Only",
+    "unavailableOnly": "Unavailable Only",
+    "showing": "Showing",
+    "of": "of",
+    "rooms": "rooms",
+    "guests": "guests"
+  },
+  "About": {
+    "title": "About Us",
+    "subtitle": "Your trusted travel partner since 2020",
+    "heroTitle": "We Make Travel",
+    "heroHighlight": "Unforgettable",
+    "heroSubtitle": "TIMEOUT Travel Agency connects you with the world's finest hotels and creates memorable experiences that last a lifetime",
+    "ourStory": "Our Story",
+    "storyTitle": "A Journey of Passion & Excellence",
+    "ourStoryText": "TIMEOUT Travel Agency was founded with a simple mission: to make luxury travel accessible to everyone. We believe that every journey should be an unforgettable experience, filled with comfort, elegance, and exceptional service.",
+    "ourMission": "Our Mission",
+    "ourMissionText": "To provide seamless booking experiences and curated accommodations that exceed expectations. We partner with the finest hotels worldwide to bring you exclusive deals and personalized service.",
+    "ourValues": "Our Values",
+    "valuesTitle": "What We Stand For",
+    "valuesSubtitle": "Our core values guide everything we do, from selecting partner hotels to serving our customers",
+    "value1Title": "Excellence",
+    "value1Text": "We strive for excellence in everything we do, from customer service to property selection.",
+    "value2Title": "Trust",
+    "value2Text": "Building lasting relationships with our customers through transparency and reliability.",
+    "value3Title": "Innovation",
+    "value3Text": "Continuously improving our platform to provide the best booking experience.",
+    "value4Title": "Passion",
+    "value4Text": "We are passionate about travel and dedicated to making your dreams come true.",
+    "team": "Our Team",
+    "teamTitle": "Meet Our Leaders",
+    "teamSubtitle": "Dedicated professionals committed to making your travel dreams a reality",
+    "stats": {
+      "hotels": "Partner Hotels",
+      "customers": "Happy Customers",
+      "countries": "Countries",
+      "support": "24/7 Support"
+    },
+    "yearsExperience": "Years of Excellence",
+    "ourJourney": "Our Journey",
+    "journeyTitle": "Milestones & Achievements",
+    "timeline": {
+      "2020": {
+        "title": "The Beginning",
+        "description": "TIMEOUT was founded with a vision to revolutionize the travel industry"
+      },
+      "2021": {
+        "title": "Rapid Growth",
+        "description": "Expanded to 100+ partner hotels across 10 countries"
+      },
+      "2022": {
+        "title": "Global Expansion",
+        "description": "Reached 300+ hotels in 20+ countries with 10,000+ happy customers"
+      },
+      "2023": {
+        "title": "Industry Recognition",
+        "description": "Awarded Best Travel Platform and reached 30,000+ customers"
+      },
+      "2024": {
+        "title": "New Horizons",
+        "description": "Launched premium services and expanded to 500+ hotels worldwide"
+      }
+    },
+    "achievement1": "500+ Premium Partner Hotels",
+    "achievement2": "50,000+ Satisfied Customers",
+    "achievement3": "Award-Winning Customer Service",
+    "team.ceo": "CEO & Founder",
+    "team.operations": "Head of Operations",
+    "team.experience": "Customer Experience",
+    "team.marketing": "Marketing Director",
+    "team.ceoBio": "Visionary leader with 15+ years in hospitality",
+    "team.operationsBio": "Expert in global hotel partnerships",
+    "team.experienceBio": "Dedicated to customer satisfaction",
+    "team.marketingBio": "Creative strategist and brand builder",
+    "testimonials": {
+      "title": "Testimonials",
+      "heading": "What Our Customers Say",
+      "1": {
+        "text": "TIMEOUT made our honeymoon absolutely perfect. The hotel recommendations were spot-on!",
+        "author": "Sarah & John",
+        "location": "New York, USA"
+      },
+      "2": {
+        "text": "Best booking experience ever. The customer service is outstanding and always available.",
+        "author": "Michael Chen",
+        "location": "Singapore"
+      },
+      "3": {
+        "text": "Found hidden gem hotels I never knew existed. TIMEOUT is now my go-to for all travels.",
+        "author": "Emma Wilson",
+        "location": "London, UK"
+      }
+    },
+    "ctaTitle": "Ready to Start Your Journey?",
+    "ctaSubtitle": "Discover our handpicked selection of premium hotels and create unforgettable memories",
+    "ctaExplore": "Explore Hotels",
+    "ctaContact": "Contact Us"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you",
+    "heroTag": "Get in Touch",
+    "heroTitle": "Let's Start a",
+    "heroHighlight": "Conversation",
+    "heroSubtitle": "Have questions? Our dedicated team is here to help you 24/7",
+    "getInTouch": "Get in Touch",
+    "getInTouchText": "Have questions about your booking or need assistance? Our team is here to help you 24/7.",
+    "stats": {
+      "support": "Support",
+      "responseTime": "Response Time",
+      "languages": "Languages"
+    },
+    "methods": {
+      "call": {
+        "title": "Call Us",
+        "description": "Speak directly with our support team",
+        "action": "Call Now"
+      },
+      "email": {
+        "title": "Email Us",
+        "description": "Get a response within 2 hours",
+        "action": "Send Email"
+      },
+      "chat": {
+        "title": "Live Chat",
+        "description": "Chat with us in real-time",
+        "availability": "Available 24/7",
+        "action": "Start Chat"
+      }
+    },
+    "form": {
+      "tag": "Send Message",
+      "title": "Send Us a Message",
+      "subtitle": "Fill out the form below and we'll get back to you as soon as possible",
+      "name": "Your Name",
+      "namePlaceholder": "John Doe",
+      "email": "Your Email",
+      "emailPlaceholder": "john@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Select a subject",
+      "subjects": {
+        "booking": "Booking Inquiry",
+        "support": "Customer Support",
+        "partnership": "Partnership",
+        "feedback": "Feedback",
+        "other": "Other"
+      },
+      "message": "Your Message",
+      "messagePlaceholder": "How can we help you?",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "We'll get back to you within 24 hours.",
+      "successTitle": "Message Sent!",
+      "error": "Failed to send message. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Address",
+      "addressValue": "123 Travel Street, Suite 100\nNew York, NY 10001",
+      "phone": "Phone",
+      "phoneValue": "+1 (555) 123-4567",
+      "email": "Email",
+      "emailValue": "info@timeout-travel.com",
+      "hours": "Working Hours",
+      "hoursValue": "Mon - Fri: 9:00 AM - 6:00 PM\nSat - Sun: 10:00 AM - 4:00 PM"
+    },
+    "map": {
+      "placeholder": "Interactive Map",
+      "openMaps": "Open in Google Maps"
+    },
+    "social": {
+      "title": "Follow Us"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Find quick answers to common questions",
+      "stillQuestions": "Still have questions?",
+      "contactUs": "Contact Our Team"
+    },
+    "faqs": {
+      "1": {
+        "question": "How do I make a reservation?",
+        "answer": "You can make a reservation by browsing our hotels and rooms, selecting your preferred accommodation, and following the booking process. You will need to provide your details and payment information."
+      },
+      "2": {
+        "question": "What is your cancellation policy?",
+        "answer": "Our cancellation policy varies depending on the hotel and room type. Generally, free cancellation is available up to 24-48 hours before check-in. Please check the specific terms when booking."
+      },
+      "3": {
+        "question": "Do you offer group bookings?",
+        "answer": "Yes, we offer special rates and services for group bookings. Please contact our team directly for group reservations of 5 or more rooms."
+      },
+      "4": {
+        "question": "How can I modify my booking?",
+        "answer": "You can modify your booking by logging into your account and accessing your reservations, or by contacting our customer support team directly."
+      },
+      "5": {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for larger bookings."
+      }
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Subscribe to our newsletter for exclusive deals and travel tips",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    }
+  },
   "common": {
     "welcome": "Welcome",
     "login": "Sign In",
@@ -18,7 +308,8 @@
     "filter": "Filter",
     "loading": "Loading...",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "goBack": "Go Back"
   },
   "nav": {
     "home": "Home",
@@ -238,6 +529,38 @@
       "description": "Description",
       "color": "Color",
       "bookings": "Bookings"
+    }
+  },
+  "HomePage": {
+    "featuredRooms": {
+      "title": "Our Favorite Rooms",
+      "subtitle": "A selection of our most popular rooms, offering the best in comfort and luxury.",
+      "explore": "Explore All Rooms"
+    },
+    "amenities": {
+      "title": "World-Class Amenities",
+      "subtitle": "We offer a wide range of amenities to make your stay as comfortable and enjoyable as possible.",
+      "pool": "Swimming Pool",
+      "poolText": "Relax and unwind in our stunning infinity pool with panoramic views.",
+      "spa": "Luxury Spa",
+      "spaText": "Indulge in a variety of treatments designed to rejuvenate your body and soul.",
+      "gym": "Fitness Center",
+      "gymText": "Stay active in our state-of-the-art gym, equipped with the latest machines.",
+      "restaurant": "Gourmet Restaurant",
+      "restaurantText": "Savor exquisite dishes prepared by our world-renowned chefs."
+    },
+    "testimonials": {
+      "title": "What Our Guests Say",
+      "subtitle": "We are proud to have created so many unforgettable memories for our guests.",
+      "testimonial1": "The most incredible hotel I have ever stayed in. The service was impeccable and the views were breathtaking. I can't wait to come back!",
+      "guest1": "Emily Johnson",
+      "location1": "New York, USA",
+      "testimonial2": "A truly magical experience. The attention to detail was amazing. The staff went above and beyond to make our stay special. Highly recommended!",
+      "guest2": "David Smith",
+      "location2": "London, UK",
+      "testimonial3": "From the moment we arrived, we were treated like royalty. The room was spacious and luxurious, and the food was divine. A perfect getaway.",
+      "guest3": "Sophie Dubois",
+      "location3": "Paris, France"
     }
   }
 }
