@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Logo } from './Logo';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { Moon, Sun, User, Home, Building2, DoorOpen, Info, Phone, Globe, LifeBuoy } from 'lucide-react';
+import { Moon, Sun, User, Home, Building2, DoorOpen, Info, Phone, Globe, LifeBuoy, Briefcase } from 'lucide-react';
 
 export function Header() {
   const locale = useLocale();
@@ -50,6 +50,7 @@ export function Header() {
     { href: `/${locale}/about`, label: t('about'), icon: Info },
     { href: `/${locale}/contact`, label: t('contact'), icon: Phone },
     { href: `/${locale}/press`, label: t('press'), icon: Info },
+    { href: `/${locale}/careers`, label: t('careers'), icon: Briefcase },
     { href: `/${locale}/help`, label: t('help'), icon: LifeBuoy },
   ];
 
@@ -123,9 +124,9 @@ export function Header() {
 
       {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 safe-area-bottom">
-        <div className="grid grid-cols-5 h-16">
+        <div className="grid grid-cols-7 h-16">
           {/* Navigation Links */}
-          {navLinks.slice(0, 3).map((link) => {
+          {navLinks.map((link) => {
             const Icon = link.icon;
             const active = isActive(link.href);
             return (

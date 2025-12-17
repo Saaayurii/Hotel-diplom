@@ -1,5 +1,7 @@
 'use client';
 
+export const revalidate = 0;
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Plus, Edit, Trash2, Tag, Calendar } from 'lucide-react';

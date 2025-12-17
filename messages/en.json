@@ -1,4 +1,75 @@
 {
+  "Careers": {
+    "hero": {
+      "title": "Shape the Future of Travel",
+      "subtitle": "Join our passionate team and help us create unforgettable experiences for travelers worldwide. We're looking for innovative minds to build the best hotel booking platform."
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The principles that guide our work and culture.",
+      "value1": {
+        "title": "Customer-Centric",
+        "description": "We are obsessed with our customers and work tirelessly to earn their trust."
+      },
+      "value2": {
+        "title": "Passion for Travel",
+        "description": "We believe in the power of travel to connect people and broaden perspectives."
+      },
+      "value3": {
+        "title": "Innovate and Simplify",
+        "description": "We are constantly looking for new ways to improve the travel experience."
+      }
+    },
+    "benefits": {
+      "title": "Why Join TIMEOUT",
+      "subtitle": "We invest in our people and offer a rewarding work environment.",
+      "benefit1": {
+        "title": "Growth Opportunities",
+        "description": "We provide continuous learning and career development opportunities to help you grow."
+      },
+      "benefit2": {
+        "title": "Work-Life Balance",
+        "description": "We offer flexible work arrangements and generous time off to ensure you have a healthy balance."
+      },
+      "benefit3": {
+        "title": "Modern Workspace",
+        "description": "Enjoy our inspiring and collaborative office environment designed for creativity."
+      }
+    },
+    "jobs": {
+      "title": "Current Openings",
+      "applyNow": "Apply Now",
+      "job1": {
+        "title": "Senior Frontend Engineer",
+        "department": "Engineering",
+        "location": "New York, USA",
+        "type": "Full-time"
+      },
+      "job2": {
+        "title": "Product Manager",
+        "department": "Product",
+        "location": "Remote",
+        "type": "Full-time"
+      },
+      "job3": {
+        "title": "UX/UI Designer",
+        "department": "Design",
+        "location": "London, UK",
+        "type": "Contract"
+      },
+      "job4": {
+        "title": "DevOps Engineer",
+        "department": "Engineering",
+        "location": "Remote",
+        "type": "Full-time"
+      }
+    },
+    "cta": {
+      "title": "Don't See Your Role?",
+      "subtitle": "We are always looking for talented individuals. If you're passionate about travel and technology, send us your resume.",
+      "button": "Contact Us"
+    }
+  },
   "Header": {
     "home": "Home",
     "hotels": "Hotels",
@@ -9,6 +80,7 @@
     "dark": "Dark",
     "light": "Light",
     "press": "Press",
+    "careers": "Careers",
     "help": "Help"
   },
   "PressPage": {
@@ -646,8 +718,10 @@
   "Help": {
     "title": "Help Center",
     "subtitle": "Find answers to your questions and get the help you need.",
+    "searchPlaceholder": "Search for topics, questions...",
     "faq": {
       "title": "Frequently Asked Questions",
+      "noResults": "No results found for your search.",
       "item1": {
         "question": "How do I book a room?",
         "answer": "You can book a room by navigating to the 'Rooms' or 'Hotels' page, selecting your desired accommodation, and following the on-screen instructions to complete the booking process."
@@ -662,13 +736,43 @@
       },
       "item4": {
         "question": "How to change the theme?",
-        "answer": "You can change the theme of the site from dark to light, for this there is a switch in the header of the site"
+        "answer": "You can change the theme of the site from dark to light, for this there is a switch in the header of the site."
+      },
+      "item5": {
+        "question": "How do I view my booking details?",
+        "answer": "You can view your booking details by logging into your account and navigating to the 'My Bookings' section. There you will find all your past and upcoming reservations."
+      },
+      "item6": {
+        "question": "How can I update my profile information?",
+        "answer": "To update your profile information, log into your account and go to the 'Profile' section. You can edit your name, contact details, and other personal information there."
       }
     },
+    "navigation": {
+      "title": "Topics",
+      "faq": "FAQ",
+      "gettingStarted": "Getting Started",
+      "bookingManagement": "Booking Management",
+      "accountSettings": "Account Settings"
+    },
+    "gettingStarted": {
+      "title": "Getting Started Guide",
+      "p1": "Welcome to TIMEOUT! To get started, you can browse our selection of hotels and rooms using the navigation bar. Use the search and filter options to find the perfect accommodation for your needs.",
+      "p2": "Once you've found a place you like, simply click 'Book Now' and follow the steps to complete your reservation. You'll need to create an account to manage your bookings."
+    },
+    "bookingManagement": {
+      "title": "Managing Your Bookings",
+      "p1": "All your bookings are available in the 'My Bookings' section of your account. Here you can view details of your upcoming and past stays, check payment status, and, if applicable, modify or cancel your reservation.",
+      "p2": "Please note that any changes to your booking are subject to the hotel's policy. Make sure to review the terms before making any changes."
+    },
+    "accountSettings": {
+      "title": "Your Account Settings",
+      "p1": "In the 'Profile' section, you can manage your personal information, including your name, email, and phone number. It is important to keep this information up to date for booking confirmations and communication.",
+      "p2": "You can also manage your notification preferences and view your review history. For security, you can change your password at any time."
+    },
     "contact": {
-      "title": "Contact Support",
-      "description": "If you can't find the answer you're looking for in our FAQ, our support team is here to help.",
-      "button": "Email Us"
+      "title": "Still Need Help?",
+      "description": "If you can't find the answer you're looking for, our support team is always here to assist you. Don't hesitate to reach out.",
+      "button": "Contact Support"
     },
     "guidelines": {
       "title": "Our Guidelines",

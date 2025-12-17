@@ -1,5 +1,7 @@
 'use client';
 
+export const revalidate = 0;
+
 import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Plus, Edit, Trash2, MapPin, Star, Search, SlidersHorizontal, ChevronDown } from 'lucide-react';
