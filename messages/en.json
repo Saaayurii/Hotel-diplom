@@ -8,7 +8,8 @@
     "signIn": "Sign In",
     "dark": "Dark",
     "light": "Light",
-    "press": "Press"
+    "press": "Press",
+    "help": "Help"
   },
   "PressPage": {
     "title": "Press",
@@ -641,5 +642,38 @@
   "Blog": {
     "title": "Our Blog",
     "welcomeMessage": "Welcome to our blog! Stay tuned for the latest news, travel tips, and exclusive offers."
+  },
+  "Help": {
+    "title": "Help Center",
+    "subtitle": "Find answers to your questions and get the help you need.",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "item1": {
+        "question": "How do I book a room?",
+        "answer": "You can book a room by navigating to the 'Rooms' or 'Hotels' page, selecting your desired accommodation, and following the on-screen instructions to complete the booking process."
+      },
+      "item2": {
+        "question": "What is the cancellation policy?",
+        "answer": "The cancellation policy varies by hotel and room type. You can find the specific cancellation policy for your booking during the reservation process and in your confirmation email."
+      },
+      "item3": {
+        "question": "How can I contact customer support?",
+        "answer": "You can contact our customer support team 24/7 via email at support@timeout.com, or by visiting our 'Contact' page for more options."
+      },
+      "item4": {
+        "question": "How to change the theme?",
+        "answer": "You can change the theme of the site from dark to light, for this there is a switch in the header of the site"
+      }
+    },
+    "contact": {
+      "title": "Contact Support",
+      "description": "If you can't find the answer you're looking for in our FAQ, our support team is here to help.",
+      "button": "Email Us"
+    },
+    "guidelines": {
+      "title": "Our Guidelines",
+      "description": "Please review our terms of service and privacy policy for detailed information about our platform.",
+      "link": "Read Privacy Policy"
+    }
   }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   fullWidth?: boolean;
   isLoading?: boolean;
+  size?: 'default' | 'icon'; // Added size prop
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -13,14 +14,15 @@ export const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   className = '',
   disabled,
+  size = 'default', // Default size
   ...props
 }) => {
   const baseStyles = `
-    px-8 py-3
     font-medium text-sm uppercase tracking-wider
     transition-all duration-300
     disabled:opacity-50 disabled:cursor-not-allowed
     relative
+    ${size === 'default' ? 'px-8 py-3' : 'p-2 rounded-md'} // Apply default padding or icon specific padding
   `;
 
   const variants = {
@@ -35,9 +37,14 @@ export const Button: React.FC<ButtonProps> = ({
       border-2 border-[#C9A56B] hover:border-black
     `,
     outline: `
-      bg-transparent text-black
-      border-2 border-black
+      bg-transparent text-black dark:text-white
+      border-2 border-black dark:border-white
       hover:bg-black hover:text-white
+    `,
+    ghost: `
+      bg-transparent text-gray-700 dark:text-gray-300
+      hover:bg-gray-100 dark:hover:bg-gray-800
+      border border-transparent
     `,
   };
 
@@ -82,3 +89,4 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+
