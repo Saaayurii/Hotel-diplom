@@ -29,6 +29,7 @@ interface Hotel {
         name: string;
       };
     };
+    cityId: string;
   };
   _count: {
     rooms: number;

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Calendar, User, Hotel as HotelIcon, Bed, DollarSign } from 'lucide-react';
+import { showSuccessToast, showErrorToast } from '@/app/lib/toast'; // Import toast for error handling
 
 interface Booking {
   id: string;
@@ -29,7 +30,7 @@ interface Booking {
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Removed loading state, as it's handled by loading.tsx
 
   useEffect(() => {
     fetchBookings();
@@ -38,12 +39,14 @@ export default function BookingsPage() {
   const fetchBookings = async () => {
     try {
       const response = await fetch('/api/admin/bookings');
+      if (!response.ok) { // Check for HTTP errors
+        throw new Error('Failed to fetch bookings');
+      }
       const data = await response.json();
       setBookings(data);
     } catch (error) {
       console.error('Error fetching bookings:', error);
-    } finally {
-      setLoading(false);
+      showErrorToast('Failed to load bookings'); // Show a toast notification
     }
   };
 
@@ -55,13 +58,7 @@ export default function BookingsPage() {
     });
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A56B]" />
-      </div>
-    );
-  }
+  // Removed if (loading) block
 
   return (
     <div>
