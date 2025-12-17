@@ -120,7 +120,6 @@ export default function HotelsPage() {
             placeholder="Search by name, city..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
             icon={Search}
           />
         </div>

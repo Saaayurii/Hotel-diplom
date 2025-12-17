@@ -1,15 +1,14 @@
-'use client';
-
 import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, LucideIcon } from 'lucide-react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  icon?: LucideIcon;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, className = '', type, ...props }, ref) => {
+  ({ label, error, className = '', type, icon: Icon, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPasswordField = type === 'password';
     const inputType = isPasswordField && showPassword ? 'text' : type;
@@ -22,12 +21,18 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </label>
         )}
         <div className="relative">
+          {Icon && (
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+              <Icon size={18} />
+            </div>
+          )}
           <input
             ref={ref}
             type={inputType}
             className={`
               w-full px-4 py-3
               ${isPasswordField ? 'pr-12' : ''}
+              ${Icon ? 'pl-10' : ''}
               border border-gray-300 dark:border-gray-600
               bg-white dark:bg-gray-800
               text-gray-900 dark:text-gray-100
@@ -60,5 +65,3 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
-
-Input.displayName = 'Input';
