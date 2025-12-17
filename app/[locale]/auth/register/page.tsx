@@ -46,14 +46,14 @@ export default function RegisterPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        alert(result.error || 'Registration failed');
+        alert(result.error || t('registrationFailed'));
         return;
       }
 
       window.location.href = `/${locale}`;
     } catch (error) {
       console.error('Registration error:', error);
-      alert('An error occurred during registration');
+      alert(t('genericError'));
     } finally {
       setIsLoading(false);
     }
@@ -85,12 +85,12 @@ export default function RegisterPage() {
               <Input
                 type="text"
                 label={t('firstName')}
-                placeholder="John"
+                placeholder={t('firstNamePlaceholder')}
                 {...register('firstName', {
-                  required: 'First name is required',
+                  required: t('firstNameRequired'),
                   minLength: {
                     value: 2,
-                    message: 'First name must be at least 2 characters',
+                    message: t('firstNameMinLength'),
                   },
                 })}
                 error={errors.firstName?.message}
@@ -99,12 +99,12 @@ export default function RegisterPage() {
               <Input
                 type="text"
                 label={t('lastName')}
-                placeholder="Doe"
+                placeholder={t('lastNamePlaceholder')}
                 {...register('lastName', {
-                  required: 'Last name is required',
+                  required: t('lastNameRequired'),
                   minLength: {
                     value: 2,
-                    message: 'Last name must be at least 2 characters',
+                    message: t('lastNameMinLength'),
                   },
                 })}
                 error={errors.lastName?.message}
@@ -114,12 +114,12 @@ export default function RegisterPage() {
             <Input
               type="email"
               label={t('email')}
-              placeholder="your@email.com"
+              placeholder={t('emailPlaceholder')}
               {...register('email', {
-                required: 'Email is required',
+                required: t('emailRequired'),
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
+                  message: t('invalidEmail'),
                 },
               })}
               error={errors.email?.message}
@@ -128,12 +128,12 @@ export default function RegisterPage() {
             <Input
               type="tel"
               label={t('phone')}
-              placeholder="+1 (555) 000-0000"
+              placeholder={t('phonePlaceholder')}
               {...register('phone', {
-                required: 'Phone number is required',
+                required: t('phoneRequired'),
                 pattern: {
                   value: /^[\d\s\+\-\(\)]+$/,
-                  message: 'Invalid phone number',
+                  message: t('invalidPhone'),
                 },
               })}
               error={errors.phone?.message}
@@ -142,12 +142,12 @@ export default function RegisterPage() {
             <Input
               type="password"
               label={t('password')}
-              placeholder="Minimum 6 characters"
+              placeholder={t('passwordPlaceholder')}
               {...register('password', {
-                required: 'Password is required',
+                required: t('passwordRequired'),
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters',
+                  message: t('passwordMinLength'),
                 },
               })}
               error={errors.password?.message}
@@ -156,11 +156,11 @@ export default function RegisterPage() {
             <Input
               type="password"
               label={t('confirmPassword')}
-              placeholder="Re-enter your password"
+              placeholder={t('confirmPasswordPlaceholder')}
               {...register('confirmPassword', {
-                required: 'Please confirm your password',
+                required: t('confirmPasswordRequired'),
                 validate: value =>
-                  value === password || 'Passwords do not match',
+                  value === password || t('passwordsDoNotMatch'),
               })}
               error={errors.confirmPassword?.message}
             />
@@ -171,7 +171,7 @@ export default function RegisterPage() {
                   type="checkbox"
                   className="mr-2 mt-0.5 w-4 h-4 border-gray-300 dark:border-gray-600 rounded text-[#C9A56B] focus:ring-[#C9A56B] dark:bg-gray-700"
                   {...register('acceptTerms', {
-                    required: 'You must accept the terms and conditions',
+                    required: t('acceptTermsRequired'),
                   })}
                 />
                 <span>
@@ -213,7 +213,7 @@ export default function RegisterPage() {
               <div className="w-full border-t border-gray-300 dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">OR</span>
+              <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">{t('or')}</span>
             </div>
           </div>
 
@@ -267,31 +267,30 @@ export default function RegisterPage() {
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-20">
-          <h2 className="text-5xl font-serif text-black dark:text-white leading-tight mb-6">
-            ARE YOU<br />
-            <span className="text-[#C9A56B]">READY?</span>
-          </h2>
+          <h2 className="text-5xl font-serif text-black dark:text-white leading-tight mb-6"
+            dangerouslySetInnerHTML={{ __html: t.raw('decorativeTitle') }}
+          />
           <p className="text-gray-600 dark:text-gray-400 italic text-lg font-serif mb-8">
-            adventure time is today
+            {t('decorativeSubtitle')}
           </p>
           <div className="space-y-4 text-gray-700 dark:text-gray-300">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 border-2 border-[#C9A56B] rounded-full flex items-center justify-center">
                 <span className="text-[#C9A56B] font-bold">✓</span>
               </div>
-              <span>Exclusive travel packages</span>
+              <span>{t('feature1')}</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 border-2 border-[#C9A56B] rounded-full flex items-center justify-center">
                 <span className="text-[#C9A56B] font-bold">✓</span>
               </div>
-              <span>Best price guarantee</span>
+              <span>{t('feature2')}</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 border-2 border-[#C9A56B] rounded-full flex items-center justify-center">
                 <span className="text-[#C9A56B] font-bold">✓</span>
               </div>
-              <span>24/7 customer support</span>
+              <span>{t('feature3')}</span>
             </div>
           </div>
         </div>

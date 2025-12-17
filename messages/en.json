@@ -177,7 +177,8 @@
     "ctaTitle": "Ready to Start Your Journey?",
     "ctaSubtitle": "Discover our handpicked selection of premium hotels and create unforgettable memories",
     "ctaExplore": "Explore Hotels",
-    "ctaContact": "Contact Us"
+    "ctaContact": "Contact Us",
+    "timeoutTravelAgency": "TIMEOUT TRAVEL AGENCY"
   },
   "Contact": {
     "title": "Contact Us",
@@ -330,7 +331,15 @@
       "signIn": "Sign In",
       "noAccount": "Don't have an account?",
       "createAccount": "Create one now",
-      "tagline": "THE BEST OPPORTUNITY TO TRAVEL"
+      "tagline": "THE BEST OPPORTUNITY TO TRAVEL",
+      "loginFailed": "Login failed",
+      "genericError": "An error occurred during login",
+      "emailPlaceholder": "your@email.com",
+      "emailIsRequired": "Email is required",
+      "invalidEmail": "Invalid email address",
+      "passwordPlaceholder": "Enter your password",
+      "passwordIsRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters"
     },
     "register": {
       "title": "Join Us",
@@ -348,7 +357,51 @@
       "createAccount": "Create Account",
       "haveAccount": "Already have an account?",
       "signInHere": "Sign in here",
-      "tagline": "START YOUR ADVENTURE TODAY"
+      "tagline": "START YOUR ADVENTURE TODAY",
+      "registrationFailed": "Registration failed",
+      "genericError": "An error occurred during registration",
+      "firstNamePlaceholder": "John",
+      "firstNameRequired": "First name is required",
+      "firstNameMinLength": "First name must be at least 2 characters",
+      "lastNamePlaceholder": "Doe",
+      "lastNameRequired": "Last name is required",
+      "lastNameMinLength": "Last name must be at least 2 characters",
+      "emailPlaceholder": "your@email.com",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Invalid email address",
+      "phonePlaceholder": "+1 (555) 000-0000",
+      "phoneRequired": "Phone number is required",
+      "invalidPhone": "Invalid phone number",
+      "passwordPlaceholder": "Minimum 6 characters",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "acceptTermsRequired": "You must accept the terms and conditions",
+      "or": "OR",
+      "decorativeTitle": "ARE YOU<br /><span class=\"text-[#C9A56B]\">READY?</span>",
+      "decorativeSubtitle": "adventure time is today",
+      "feature1": "Exclusive travel packages",
+      "feature2": "Best price guarantee",
+      "feature3": "24/7 customer support"
+    }
+  },
+  "Logo": {
+    "travelAgency": "TRAVEL AGENCY"
+  },
+  "api": {
+    "auth": {
+      "login": {
+        "emailAndPasswordRequired": "Email and password are required",
+        "invalidCredentials": "Invalid credentials",
+        "internalServerError": "Internal server error"
+      },
+      "register": {
+        "allFieldsRequired": "All fields are required",
+        "userAlreadyExists": "User already exists",
+        "internalServerError": "Internal server error"
+      }
     }
   },
   "admin": {
@@ -562,5 +615,21 @@
       "guest3": "Sophie Dubois",
       "location3": "Paris, France"
     }
+  },
+  "Footer": {
+    "privacyPolicy": "Privacy Policy",
+    "adventureTime": "Adventure time is today",
+    "experienceLuxury": "Experience luxury and comfort with TIMEOUT. Your gateway to unforgettable stays around the world."
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: December 17, 2025",
+    "section1Title": "Information We Collect",
+    "section1Text": "We collect information that you provide to us directly, such as when you create an account, book a room, or contact us for support. This may include your name, email address, phone number, and payment information.",
+    "section2Title": "How We Use Your Information",
+    "section2Text": "We use the information we collect to provide, maintain, and improve our services, to process your bookings, and to communicate with you. We may also use your information to send you promotional offers and updates about our services.",
+    "section3Title": "Sharing Your Information",
+    "section3Text": "We do not sell or rent your personal information to third parties. We may share your information with our trusted partners, such as hotels and payment processors, to facilitate your bookings and provide you with a seamless experience.",
+    "madeInDonbass": "Made in Donbass"
   }
 }

@@ -33,7 +33,7 @@ export default function LoginPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        alert(result.error || 'Login failed');
+        alert(result.error || t('loginFailed'));
         return;
       }
 
@@ -45,7 +45,7 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Login error:', error);
-      alert('An error occurred during login');
+      alert(t('genericError'));
     } finally {
       setIsLoading(false);
     }
@@ -136,12 +136,12 @@ export default function LoginPage() {
             <Input
               type="email"
               label={t('email')}
-              placeholder="your@email.com"
+              placeholder={t('emailPlaceholder')}
               {...register('email', {
-                required: 'Email is required',
+                required: t('emailIsRequired'),
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
+                  message: t('invalidEmail'),
                 },
               })}
               error={errors.email?.message}
@@ -150,12 +150,12 @@ export default function LoginPage() {
             <Input
               type="password"
               label={t('password')}
-              placeholder="Enter your password"
+              placeholder={t('passwordPlaceholder')}
               {...register('password', {
-                required: 'Password is required',
+                required: t('passwordIsRequired'),
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters',
+                  message: t('passwordMinLength'),
                 },
               })}
               error={errors.password?.message}

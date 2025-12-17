@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 
     if (!email || !password || !firstName || !lastName) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'api.auth.register.allFieldsRequired' },
         { status: 400 }
       );
     }
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: 'User already exists' },
+        { error: 'api.auth.register.userAlreadyExists' },
         { status: 400 }
       );
     }
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'api.auth.register.internalServerError' },
       { status: 500 }
     );
   }
