@@ -21,8 +21,6 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         theme="light"
         className="toast-container"
         toastClassName="toast-item"
-        bodyClassName="toast-body"
-        progressClassName="toast-progress"
       />
     </>
   );

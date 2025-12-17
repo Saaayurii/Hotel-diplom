@@ -18,10 +18,10 @@ interface City {
 interface Hotel {
   id?: string;
   name: string;
-  description?: string;
+  description?: string | null;
   stars: number;
-  phone?: string;
-  email?: string;
+  phone?: string | null;
+  email?: string | null;
   checkInTime: string;
   checkOutTime: string;
   isActive: boolean;
@@ -29,9 +29,9 @@ interface Hotel {
   address?: {
     street: string;
     building: string;
-    postalCode?: string;
-    latitude?: number;
-    longitude?: number;
+    postalCode?: string | null;
+    latitude?: number | null;
+    longitude?: number | null;
     cityId: string;
   };
 }

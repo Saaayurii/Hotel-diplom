@@ -24,10 +24,10 @@ interface Room {
   hotelId: string;
   roomTypeId: string;
   floor: number;
-  size?: number;
+  size?: number | null;
   pricePerNight: string;
   isAvailable: boolean;
-  description?: string;
+  description?: string | null;
 }
 
 interface RoomFormProps {
