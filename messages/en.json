@@ -7,8 +7,12 @@
     "contact": "Contact",
     "signIn": "Sign In",
     "dark": "Dark",
-    "light": "Light"
+    "light": "Light",
+    "press": "Press"
   },
+  "PressPage": {
+    "title": "Press",
+    "content": "Welcome to our press page! Here you will find the latest news, press releases, and media resources about our company.",
   "Hotels": {
     "title": "Our Hotels",
     "subtitle": "Discover luxury accommodations around the world",
@@ -619,17 +623,22 @@
   "Footer": {
     "privacyPolicy": "Privacy Policy",
     "adventureTime": "Adventure time is today",
-    "experienceLuxury": "Experience luxury and comfort with TIMEOUT. Your gateway to unforgettable stays around the world."
+    "experienceLuxury": "Experience luxury and comfort with TIMEOUT. Your gateway to unforgettable stays around the world.",
+    "exploreWorld": "IT'S TIME TO EXPLORE THE WORLD"
   },
-  "PrivacyPolicy": {
-    "title": "Privacy Policy",
-    "lastUpdated": "Last updated: December 17, 2025",
-    "section1Title": "Information We Collect",
-    "section1Text": "We collect information that you provide to us directly, such as when you create an account, book a room, or contact us for support. This may include your name, email address, phone number, and payment information.",
-    "section2Title": "How We Use Your Information",
-    "section2Text": "We use the information we collect to provide, maintain, and improve our services, to process your bookings, and to communicate with you. We may also use your information to send you promotional offers and updates about our services.",
-    "section3Title": "Sharing Your Information",
-    "section3Text": "We do not sell or rent your personal information to third parties. We may share your information with our trusted partners, such as hotels and payment processors, to facilitate your bookings and provide you with a seamless experience.",
-    "madeInDonbass": "Made in Donbass"
+      "PrivacyPolicy": {
+        "title": "Privacy Policy",
+        "lastUpdated": "Last updated: December 17, 2025",
+        "section1Title": "Information We Collect",
+        "section1Text": "We collect information that you provide to us directly, such as when you create an account, book a room, or contact us for support. This may include your name, email address, phone number, and payment information.",
+        "section2Title": "How We Use Your Information",
+        "section2Text": "We use the information we collect to provide, maintain, and improve our services, to process your bookings, and to communicate with you. We may also use your information to send you promotional offers and updates about our services.",
+        "section3Title": "Sharing Your Information",
+        "section3Text": "We do not sell or rent your personal information to third parties. We may share your information with our trusted partners, such as hotels and payment processors, to facilitate your bookings and provide you with a seamless experience.",
+        "madeInDonbass": "Made in Donbass"
+      },
+      "Blog": {
+        "title": "Our Blog",
+        "welcomeMessage": "Welcome to our blog! Stay tuned for the latest news, travel tips, and exclusive offers."
+      }
   }
-}
