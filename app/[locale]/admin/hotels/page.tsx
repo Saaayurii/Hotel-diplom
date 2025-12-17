@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Plus, Edit, Trash2, MapPin, Star } from 'lucide-react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { Plus, Edit, Trash2, MapPin, Star, Search, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 import { Modal } from '@/app/components/ui/Modal';
 import { HotelForm } from '@/app/components/admin/HotelForm';
 import { TableSkeleton } from '@/app/components/ui/Skeleton';
 import { showSuccessToast, showErrorToast } from '@/app/lib/toast';
+import { Input } from '@/app/components/ui/Input';
 
 interface Hotel {
   id: string;
@@ -18,15 +20,9 @@ interface Hotel {
   isActive: boolean;
   checkInTime: string;
   checkOutTime: string;
-  addressId: string;
   address: {
-    id: string;
     street: string;
     building: string;
-    postalCode: string | null;
-    latitude: number | null;
-    longitude: number | null;
-    cityId: string;
     city: {
       name: string;
       country: {
@@ -44,6 +40,10 @@ export default function HotelsPage() {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+
+  const t = useTranslations('admin.hotels');
 
   useEffect(() => {
     fetchHotels();
@@ -53,6 +53,7 @@ export default function HotelsPage() {
     try {
       setLoading(true);
       const response = await fetch('/api/admin/hotels');
+      if (!response.ok) throw new Error('Failed to fetch hotels');
       const data = await response.json();
       setHotels(data);
     } catch (error) {
@@ -63,16 +64,25 @@ export default function HotelsPage() {
     }
   };
 
+  const filteredHotels = useMemo(() => {
+    return hotels
+      .filter(hotel => {
+        if (statusFilter === 'all') return true;
+        return statusFilter === 'active' ? hotel.isActive : !hotel.isActive;
+      })
+      .filter(hotel =>
+        hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        hotel.address.city.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        hotel.address.city.country.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }, [hotels, searchTerm, statusFilter]);
+
   const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
+    if (!confirm(t('deleteConfirm', { name }))) return;
 
     try {
       const response = await fetch(`/api/admin/hotels/${id}`, { method: 'DELETE' });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete hotel');
-      }
-
+      if (!response.ok) throw new Error('Failed to delete hotel');
       showSuccessToast('Hotel deleted successfully');
       fetchHotels();
     } catch (error) {
@@ -100,144 +110,116 @@ export default function HotelsPage() {
     handleModalClose();
     fetchHotels();
   };
-
-  if (loading) {
-    return (
-      <div>
-        <div className="mb-8">
-          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">Hotels Management</h1>
-          <p className="text-gray-600 dark:text-gray-400">Manage your hotels and properties</p>
-        </div>
-        <TableSkeleton rows={5} columns={7} />
-      </div>
-    );
-  }
-
+  
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">Hotels Management</h1>
-          <p className="text-gray-600 dark:text-gray-400">Manage your hotels and properties</p>
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="relative w-full sm:max-w-xs">
+          <Input
+            type="text"
+            placeholder="Search by name, city..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+            icon={Search}
+          />
         </div>
-        <Button variant="primary" onClick={handleCreate}>
-          <Plus size={20} className="mr-2" />
-          Add Hotel
-        </Button>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          {/* You would create a proper Select component for this */}
+          <div className="relative w-full sm:w-40">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="w-full pl-3 pr-8 py-2.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg text-sm focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all appearance-none"
+            >
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+          <Button variant="primary" onClick={handleCreate} className="flex-shrink-0">
+            <Plus size={20} className="mr-2" />
+            {t('addHotel')}
+          </Button>
+        </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Hotel
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Location
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Stars
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Rooms
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Contact
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900 dark:text-white">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {hotels.length === 0 ? (
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
+        {loading ? (
+          <TableSkeleton rows={5} columns={6} />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-gray-50 dark:bg-gray-800/50">
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
-                    No hotels found. Add your first hotel to get started.
-                  </td>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Hotel</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Location</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Rating</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Rooms</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Status</th>
+                  <th className="p-4 text-right font-semibold text-gray-600 dark:text-gray-300">Actions</th>
                 </tr>
-              ) : (
-                hotels.map((hotel) => (
-                  <tr key={hotel.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <td className="px-6 py-4">
-                      <div>
-                        <div className="font-semibold text-gray-900 dark:text-white">{hotel.name}</div>
-                        {hotel.description && (
-                          <div className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">
-                            {hotel.description}
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                        <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                        <div>
-                          <div>{hotel.address.street} {hotel.address.building}</div>
-                          <div>{hotel.address.city.name}, {hotel.address.city.country.name}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-1">
-                        <Star size={16} className="fill-[#C9A56B] text-[#C9A56B]" />
-                        <span className="font-medium text-gray-900 dark:text-white">{hotel.stars}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-gray-900 dark:text-white">{hotel._count.rooms}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm">
-                        {hotel.email && <div className="text-gray-900 dark:text-white">{hotel.email}</div>}
-                        {hotel.phone && <div className="text-gray-600 dark:text-gray-400">{hotel.phone}</div>}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                          hotel.isActive
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
-                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
-                        }`}
-                      >
-                        {hotel.isActive ? 'Active' : 'Inactive'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center justify-end gap-2">
-                        <button
-                          onClick={() => handleEdit(hotel)}
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                        >
-                          <Edit size={18} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(hotel.id, hotel.name)}
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </div>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
+                {filteredHotels.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400">
+                      No hotels found.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : (
+                  filteredHotels.map((hotel) => (
+                    <tr key={hotel.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <td className="p-4 align-top">
+                        <div className="font-semibold text-gray-900 dark:text-white">{hotel.name}</div>
+                        <div className="text-gray-500 line-clamp-1">{hotel.email}</div>
+                      </td>
+                      <td className="p-4 align-top text-gray-600 dark:text-gray-400">
+                        {hotel.address.street}, {hotel.address.city.name}, {hotel.address.city.country.name}
+                      </td>
+                      <td className="p-4 align-top">
+                        <div className="flex items-center gap-1">
+                          <Star size={16} className="fill-amber-400 text-amber-400" />
+                          <span className="font-semibold">{hotel.stars.toFixed(1)}</span>
+                        </div>
+                      </td>
+                      <td className="p-4 align-top font-medium text-gray-900 dark:text-gray-200">{hotel._count.rooms}</td>
+                      <td className="p-4 align-top">
+                        <span
+                          className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                            hotel.isActive
+                              ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+                              : 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300'
+                          }`}
+                        >
+                          {hotel.isActive ? t('active') : t('inactive')}
+                        </span>
+                      </td>
+                      <td className="p-4 align-top text-right">
+                        <div className="inline-flex items-center gap-1">
+                          <Button variant="ghost" size="icon" onClick={() => handleEdit(hotel)}>
+                            <Edit size={16} />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="text-red-500 hover:text-red-600" onClick={() => handleDelete(hotel.id, hotel.name)}>
+                            <Trash2 size={16} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       <Modal
         isOpen={modalOpen}
         onClose={handleModalClose}
         title={selectedHotel ? 'Edit Hotel' : 'Create New Hotel'}
-        size="lg"
+        size="2xl"
       >
         <HotelForm
           hotel={selectedHotel}

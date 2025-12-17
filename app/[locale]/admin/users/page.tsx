@@ -1,7 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Mail, Phone, Calendar, Shield } from 'lucide-react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { Mail, Phone, Calendar, Shield, Search, ChevronDown, UserPlus, Edit, Trash2 } from 'lucide-react';
+import { TableSkeleton } from '@/app/components/ui/Skeleton';
+import { Input } from '@/app/components/ui/Input';
+import { Button } from '@/app/components/ui/Button';
 
 interface User {
   id: string;
@@ -10,7 +14,7 @@ interface User {
   lastName: string;
   phone: string | null;
   dateOfBirth: string | null;
-  role: string;
+  role: 'ADMIN' | 'MANAGER' | 'CUSTOMER';
   isActive: boolean;
   createdAt: string;
   _count: {
@@ -22,6 +26,11 @@ interface User {
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [roleFilter, setRoleFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+
+  const t = useTranslations('admin.users');
 
   useEffect(() => {
     fetchUsers();
@@ -29,7 +38,9 @@ export default function UsersPage() {
 
   const fetchUsers = async () => {
     try {
+      setLoading(true);
       const response = await fetch('/api/admin/users');
+      if (!response.ok) throw new Error('Failed to fetch users');
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -39,145 +50,148 @@ export default function UsersPage() {
     }
   };
 
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
-  };
+  const filteredUsers = useMemo(() => {
+    return users
+      .filter(user => {
+        if (roleFilter === 'all') return true;
+        return user.role === roleFilter;
+      })
+      .filter(user => {
+        if (statusFilter === 'all') return true;
+        return statusFilter === 'active' ? user.isActive : !user.isActive;
+      })
+      .filter(user =>
+        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }, [users, searchTerm, roleFilter, statusFilter]);
 
-  const getRoleBadge = (role: string) => {
-    const colors = {
-      ADMIN: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400',
-      MANAGER: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400',
-      CUSTOMER: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300',
-    };
-    return colors[role as keyof typeof colors] || colors.CUSTOMER;
-  };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A56B]" />
-      </div>
-    );
-  }
-
+  const formatDate = (date: string) => new Date(date).toLocaleDateString(undefined, {
+    year: 'numeric', month: 'short', day: 'numeric'
+  });
+  
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">Users Management</h1>
-          <p className="text-gray-600 dark:text-gray-400">View and manage all users</p>
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="relative w-full sm:max-w-xs">
+          <Input
+            type="text"
+            placeholder="Search by name, email..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+            icon={Search}
+          />
+        </div>
+        <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
+          <div className="relative w-full sm:w-36">
+            <select
+              value={roleFilter}
+              onChange={(e) => setRoleFilter(e.target.value)}
+              className="w-full pl-3 pr-8 py-2.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg text-sm focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all appearance-none"
+            >
+              <option value="all">All Roles</option>
+              <option value="ADMIN">Admin</option>
+              <option value="MANAGER">Manager</option>
+              <option value="CUSTOMER">Customer</option>
+            </select>
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+          <div className="relative w-full sm:w-36">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="w-full pl-3 pr-8 py-2.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg text-sm focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all appearance-none"
+            >
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+          <Button variant="primary" className="flex-shrink-0">
+            <UserPlus size={20} className="mr-2" />
+            Add User
+          </Button>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  User
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Contact
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Role
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Bookings
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Reviews
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Joined
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {users.length === 0 ? (
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
+        {loading ? (
+          <TableSkeleton rows={8} columns={6} />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-gray-50 dark:bg-gray-800/50">
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
-                    No users found.
-                  </td>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">User</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Contact</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Role</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Activity</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Joined</th>
+                  <th className="p-4 text-left font-semibold text-gray-600 dark:text-gray-300">Status</th>
+                  <th className="p-4 text-right font-semibold text-gray-600 dark:text-gray-300">Actions</th>
                 </tr>
-              ) : (
-                users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <td className="px-6 py-4">
-                      <div>
-                        <div className="font-semibold text-gray-900 dark:text-white">
-                          {user.firstName} {user.lastName}
-                        </div>
-                        {user.dateOfBirth && (
-                          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            <Calendar size={12} />
-                            <span>Born {formatDate(user.dateOfBirth)}</span>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div>
-                        <div className="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
-                          <Mail size={14} />
-                          <span>{user.email}</span>
-                        </div>
-                        {user.phone && (
-                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            <Phone size={14} />
-                            <span>{user.phone}</span>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-2">
-                        <Shield size={14} className="text-gray-400" />
-                        <span
-                          className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getRoleBadge(
-                            user.role
-                          )}`}
-                        >
-                          {user.role}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-gray-900 dark:text-white">{user._count.bookings}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-gray-900 dark:text-white">{user._count.reviews}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {formatDate(user.createdAt)}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                          user.isActive
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
-                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
-                        }`}
-                      >
-                        {user.isActive ? 'Active' : 'Inactive'}
-                      </span>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
+                {filteredUsers.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400">
+                      No users found.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : (
+                  filteredUsers.map((user) => (
+                    <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <td className="p-4 align-top">
+                        <div className="font-semibold text-gray-900 dark:text-white">{user.firstName} {user.lastName}</div>
+                        {user.dateOfBirth && <div className="text-gray-500 text-xs">Born {formatDate(user.dateOfBirth)}</div>}
+                      </td>
+                      <td className="p-4 align-top text-gray-600 dark:text-gray-400">
+                        <div className="flex items-center gap-2"> <Mail size={14}/> {user.email}</div>
+                        {user.phone && <div className="flex items-center gap-2 mt-1"><Phone size={14}/>{user.phone}</div>}
+                      </td>
+                      <td className="p-4 align-top">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs font-semibold rounded-full ${
+                            user.role === 'ADMIN' ? 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300' :
+                            user.role === 'MANAGER' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
+                            'bg-gray-100 text-gray-800 dark:bg-gray-700/60 dark:text-gray-300'
+                          }`}
+                        >
+                          <Shield size={12}/>{user.role}
+                        </span>
+                      </td>
+                      <td className="p-4 align-top text-gray-600 dark:text-gray-400">
+                        <div>{user._count.bookings} bookings</div>
+                        <div>{user._count.reviews} reviews</div>
+                      </td>
+                      <td className="p-4 align-top text-gray-600 dark:text-gray-400">{formatDate(user.createdAt)}</td>
+                      <td className="p-4 align-top">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs font-semibold rounded-full ${
+                            user.isActive
+                              ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+                              : 'bg-gray-100 dark:bg-gray-700/60 text-gray-800 dark:text-gray-300'
+                          }`}
+                        >
+                           <span className={`h-2 w-2 rounded-full ${user.isActive ? 'bg-green-500' : 'bg-gray-400'}`} />
+                          {user.isActive ? t('active') : t('inactive')}
+                        </span>
+                      </td>
+                      <td className="p-4 align-top text-right">
+                        <div className="inline-flex items-center gap-1">
+                          <Button variant="ghost" size="icon"><Edit size={16} /></Button>
+                          <Button variant="ghost" size="icon" className="text-red-500 hover:text-red-600"><Trash2 size={16} /></Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
