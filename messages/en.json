@@ -85,7 +85,57 @@
   },
   "PressPage": {
     "title": "Press",
-    "content": "Welcome to our press page! Here you will find the latest news, press releases, and media resources about our company."
+    "content": "Welcome to our press page! Here you will find the latest news, press releases, and media resources about our company.",
+    "hero": {
+      "badge": "Press Center",
+      "title": "TIMEOUT in the Media",
+      "subtitle": "Latest news, press releases, and media resources about TIMEOUT Travel Agency",
+      "downloadKit": "Download Press Kit",
+      "contactPress": "Contact Press Team"
+    },
+    "stats": {
+      "hotels": "Partner Hotels",
+      "customers": "Happy Customers",
+      "countries": "Countries Worldwide",
+      "satisfaction": "Satisfaction Rate"
+    },
+    "releases": {
+      "title": "Latest Press Releases",
+      "subtitle": "Stay up to date with our latest announcements and company news",
+      "readMore": "Read More"
+    },
+    "release1": {
+      "title": "TIMEOUT Expands to 500+ Premium Hotels Worldwide",
+      "excerpt": "We're excited to announce that TIMEOUT has partnered with over 500 luxury hotels across 30+ countries, making premium travel more accessible than ever."
+    },
+    "release2": {
+      "title": "TIMEOUT Wins Best Travel Platform Award 2025",
+      "excerpt": "TIMEOUT has been recognized as the Best Travel Platform of 2025 by Travel Industry Awards for exceptional customer service and innovation."
+    },
+    "release3": {
+      "title": "New Mobile App Launch with AI-Powered Recommendations",
+      "excerpt": "Our new mobile app features AI-powered hotel recommendations, making it easier than ever to find your perfect stay."
+    },
+    "media": {
+      "title": "Featured In",
+      "subtitle": "TIMEOUT has been featured in leading travel and business publications worldwide"
+    },
+    "pressKit": {
+      "title": "Press Kit & Resources",
+      "subtitle": "Download our brand assets, company information, and media resources",
+      "brandAssets": "Brand Assets",
+      "brandAssetsDesc": "Logos, brand guidelines, and visual assets",
+      "companyInfo": "Company Information",
+      "companyInfoDesc": "Company overview, leadership bios, and fact sheets",
+      "download": "Download"
+    },
+    "contact": {
+      "title": "Press Inquiries",
+      "subtitle": "For media inquiries and interview requests, please contact our press team",
+      "email": "Email",
+      "phone": "Phone",
+      "hours": "Available Monday - Friday, 9:00 AM - 6:00 PM EST"
+    }
   },
   "Hotels": {
     "title": "Our Hotels",
@@ -225,14 +275,18 @@
     "achievement1": "500+ Premium Partner Hotels",
     "achievement2": "50,000+ Satisfied Customers",
     "achievement3": "Award-Winning Customer Service",
-    "team.ceo": "CEO & Founder",
-    "team.operations": "Head of Operations",
-    "team.experience": "Customer Experience",
-    "team.marketing": "Marketing Director",
-    "team.ceoBio": "Visionary leader with 15+ years in hospitality",
-    "team.operationsBio": "Expert in global hotel partnerships",
-    "team.experienceBio": "Dedicated to customer satisfaction",
-    "team.marketingBio": "Creative strategist and brand builder",
+    "teamRoles": {
+      "ceo": "CEO & Founder",
+      "operations": "Head of Operations",
+      "experience": "Customer Experience",
+      "marketing": "Marketing Director"
+    },
+    "teamBios": {
+      "ceo": "Visionary leader with 15+ years in hospitality",
+      "operations": "Expert in global hotel partnerships",
+      "experience": "Dedicated to customer satisfaction",
+      "marketing": "Creative strategist and brand builder"
+    },
     "testimonials": {
       "title": "Testimonials",
       "heading": "What Our Customers Say",
@@ -663,6 +717,52 @@
     }
   },
   "HomePage": {
+    "hero": {
+      "title1": "IT'S TIME TO",
+      "title2": "EXPLORE",
+      "title3": "THE WORLD",
+      "tagline": "adventure time is today",
+      "description": "Book your perfect hotel room with our modern online booking system. Experience luxury, comfort, and unforgettable stays around the world.",
+      "exploreHotels": "EXPLORE HOTELS",
+      "learnMore": "LEARN MORE",
+      "stats": {
+        "hotels": "Hotels",
+        "bookings": "Bookings",
+        "rating": "Rating"
+      }
+    },
+    "search": {
+      "title": "Find Your Perfect Stay",
+      "destination": "Destination",
+      "destinationPlaceholder": "Where to?",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "guests": "Guests",
+      "guestsPlaceholder": "1 Guest",
+      "searchHotels": "SEARCH HOTELS"
+    },
+    "features": {
+      "badge": "WHY CHOOSE US",
+      "title": "The Best Opportunity",
+      "titleHighlight": "to Travel",
+      "subtitle": "Experience seamless booking with our modern platform designed for travelers who seek comfort and luxury.",
+      "quality": {
+        "title": "Premium Quality",
+        "description": "Handpicked luxury hotels and resorts for unforgettable experiences"
+      },
+      "secure": {
+        "title": "Secure Booking",
+        "description": "Safe and encrypted payment system for your peace of mind"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Round-the-clock customer service for all your needs"
+      },
+      "prices": {
+        "title": "Best Prices",
+        "description": "Competitive rates and exclusive deals for our members"
+      }
+    },
     "featuredRooms": {
       "title": "Our Favorite Rooms",
       "subtitle": "A selection of our most popular rooms, offering the best in comfort and luxury.",

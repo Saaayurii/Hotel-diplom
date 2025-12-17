@@ -1,7 +1,5 @@
 'use client';
 
-export const revalidate = 0;
-
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Plus, Edit, Trash2, Tag, Calendar } from 'lucide-react';
@@ -73,14 +71,14 @@ export default function DiscountsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-serif text-black dark:text-white mb-2">Discounts Management</h1>
           <p className="text-gray-600 dark:text-gray-400">Manage discount codes and promotions</p>
         </div>
-        <Link href="/admin/discounts/new">
-          <Button variant="primary">
-            <Plus size={20} className="mr-2" />
+        <Link href="/admin/discounts/new" className="w-full sm:w-auto">
+          <Button variant="primary" className="w-full">
+            <Plus size={20} />
             Add Discount
           </Button>
         </Link>

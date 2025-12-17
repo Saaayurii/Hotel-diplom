@@ -112,13 +112,13 @@ export default function PaymentMethodsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-serif text-black dark:text-white mb-2">{t('title')}</h1>
           <p className="text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
         </div>
-        <Button variant="primary" onClick={() => openModal()}>
-          <Plus size={20} className="mr-2" />
+        <Button variant="primary" onClick={() => openModal()} className="w-full sm:w-auto">
+          <Plus size={20} />
           {t('add')}
         </Button>
       </div>

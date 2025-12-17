@@ -146,6 +146,13 @@
     padding-bottom: env(safe-area-inset-bottom, 0);
   }
 
+  /* Padding for mobile bottom navigation */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: 4rem; /* 64px - height of mobile bottom nav */
+    }
+  }
+
   /* Typography improvements */
   h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility;

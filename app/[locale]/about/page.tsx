@@ -70,10 +70,10 @@ export default function AboutPage() {
   ];
 
   const team = [
-    { name: 'Alex Johnson', role: t('team.ceo'), image: null, bio: t('team.ceoBio') },
-    { name: 'Maria Garcia', role: t('team.operations'), image: null, bio: t('team.operationsBio') },
-    { name: 'David Chen', role: t('team.experience'), image: null, bio: t('team.experienceBio') },
-    { name: 'Emma Wilson', role: t('team.marketing'), image: null, bio: t('team.marketingBio') },
+    { name: 'Alex Johnson', role: t('teamRoles.ceo'), image: null, bio: t('teamBios.ceo') },
+    { name: 'Maria Garcia', role: t('teamRoles.operations'), image: null, bio: t('teamBios.operations') },
+    { name: 'David Chen', role: t('teamRoles.experience'), image: null, bio: t('teamBios.experience') },
+    { name: 'Emma Wilson', role: t('teamRoles.marketing'), image: null, bio: t('teamBios.marketing') },
   ];
 
   const testimonials = [

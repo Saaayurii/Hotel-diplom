@@ -1,7 +1,5 @@
 'use client';
 
-export const revalidate = 0;
-
 import React, { useEffect, useState } from 'react';
 import { Calendar, User, Hotel as HotelIcon, Bed, DollarSign } from 'lucide-react';
 import { showSuccessToast, showErrorToast } from '@/app/lib/toast'; // Import toast for error handling

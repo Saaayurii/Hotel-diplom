@@ -54,19 +54,19 @@ export default function Home() {
                 </div>
 
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
-                  IT'S TIME TO
+                  {t('hero.title1')}
                   <br />
-                  <span className="text-[#C9A56B]">EXPLORE</span>
+                  <span className="text-[#C9A56B]">{t('hero.title2')}</span>
                   <br />
-                  THE WORLD
+                  {t('hero.title3')}
                 </h1>
 
                 <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-4 italic font-serif">
-                  adventure time is today
+                  {t('hero.tagline')}
                 </p>
 
                 <p className="text-base text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0">
-                  Book your perfect hotel room with our modern online booking system. Experience luxury, comfort, and unforgettable stays around the world.
+                  {t('hero.description')}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -74,13 +74,13 @@ export default function Home() {
                     href="#search"
                     className="px-8 py-4 rounded-lg bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                   >
-                    EXPLORE HOTELS
+                    {t('hero.exploreHotels')}
                   </Link>
                   <Link
                     href="/about"
                     className="px-8 py-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 font-medium hover:border-[#C9A56B] hover:text-[#C9A56B] transition-all"
                   >
-                    LEARN MORE
+                    {t('hero.learnMore')}
                   </Link>
                 </div>
 
@@ -88,15 +88,15 @@ export default function Home() {
                 <div className="grid grid-cols-3 gap-6 mt-12 max-w-md mx-auto lg:mx-0">
                   <div className="text-center lg:text-left">
                     <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">500+</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Hotels</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('hero.stats.hotels')}</div>
                   </div>
                   <div className="text-center lg:text-left">
                     <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">50K+</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Bookings</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('hero.stats.bookings')}</div>
                   </div>
                   <div className="text-center lg:text-left">
                     <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">4.9</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Rating</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('hero.stats.rating')}</div>
                   </div>
                 </div>
               </div>
@@ -145,20 +145,20 @@ export default function Home() {
             <div className="max-w-5xl mx-auto">
               <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8">
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
-                  Find Your Perfect Stay
+                  {t('search.title')}
                 </h2>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {/* Destination */}
                   <div className="relative">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Destination
+                      {t('search.destination')}
                     </label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                       <input
                         type="text"
-                        placeholder="Where to?"
+                        placeholder={t('search.destinationPlaceholder')}
                         className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
                       />
                     </div>
@@ -167,7 +167,7 @@ export default function Home() {
                   {/* Check-in */}
                   <div className="relative">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Check-in
+                      {t('search.checkIn')}
                     </label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -181,7 +181,7 @@ export default function Home() {
                   {/* Check-out */}
                   <div className="relative">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Check-out
+                      {t('search.checkOut')}
                     </label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -195,15 +195,15 @@ export default function Home() {
                   {/* Guests */}
                   <div className="relative">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Guests
+                      {t('search.guests')}
                     </label>
                     <div className="relative">
                       <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                       <select className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all appearance-none">
-                        <option>1 Guest</option>
-                        <option>2 Guests</option>
-                        <option>3 Guests</option>
-                        <option>4+ Guests</option>
+                        <option>{t('search.guestsPlaceholder')}</option>
+                        <option>2 {t('search.guests')}</option>
+                        <option>3 {t('search.guests')}</option>
+                        <option>4+ {t('search.guests')}</option>
                       </select>
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export default function Home() {
 
                 <button className="w-full mt-6 px-8 py-4 rounded-lg bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
                   <Search size={20} />
-                  SEARCH HOTELS
+                  {t('search.searchHotels')}
                 </button>
               </div>
             </div>
@@ -223,13 +223,13 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-2 rounded-full bg-[#C9A56B]/10 text-[#C9A56B] text-sm font-medium mb-4">
-                WHY CHOOSE US
+                {t('features.badge')}
               </span>
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                The Best Opportunity<br />to Travel
+                {t('features.title')}<br />{t('features.titleHighlight')}
               </h2>
               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Experience seamless booking with our modern platform designed for travelers who seek comfort and luxury.
+                {t('features.subtitle')}
               </p>
             </div>
 
@@ -240,10 +240,10 @@ export default function Home() {
                   <Star className="w-8 h-8 text-[#C9A56B] group-hover:text-white transition-all" />
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  Premium Quality
+                  {t('features.quality.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Handpicked luxury hotels and resorts for unforgettable experiences
+                  {t('features.quality.description')}
                 </p>
               </div>
 
@@ -253,10 +253,10 @@ export default function Home() {
                   <Shield className="w-8 h-8 text-[#C9A56B] group-hover:text-white transition-all" />
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  Secure Booking
+                  {t('features.secure.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Safe and encrypted payment system for your peace of mind
+                  {t('features.secure.description')}
                 </p>
               </div>
 
@@ -266,10 +266,10 @@ export default function Home() {
                   <Headphones className="w-8 h-8 text-[#C9A56B] group-hover:text-white transition-all" />
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  24/7 Support
+                  {t('features.support.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Round-the-clock customer service for all your needs
+                  {t('features.support.description')}
                 </p>
               </div>
 
@@ -279,10 +279,10 @@ export default function Home() {
                   <Award className="w-8 h-8 text-[#C9A56B] group-hover:text-white transition-all" />
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  Best Prices
+                  {t('features.prices.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Competitive rates and exclusive deals for our members
+                  {t('features.prices.description')}
                 </p>
               </div>
             </div>

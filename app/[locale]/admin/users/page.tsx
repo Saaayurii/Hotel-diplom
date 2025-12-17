@@ -109,8 +109,8 @@ export default function UsersPage() {
             </select>
             <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
           </div>
-          <Button variant="primary" className="flex-shrink-0">
-            <UserPlus size={20} className="mr-2" />
+          <Button variant="primary" className="flex-shrink-0 w-full sm:w-auto">
+            <UserPlus size={20} />
             Add User
           </Button>
         </div>

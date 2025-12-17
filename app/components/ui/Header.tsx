@@ -124,23 +124,23 @@ export function Header() {
 
       {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 safe-area-bottom">
-        <div className="grid grid-cols-7 h-16">
-          {/* Navigation Links */}
-          {navLinks.map((link) => {
+        <div className="flex items-center justify-around h-16 px-2">
+          {/* Main Navigation Links - Show only 5 important ones */}
+          {navLinks.slice(0, 5).map((link) => {
             const Icon = link.icon;
             const active = isActive(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex flex-col items-center justify-center gap-0.5 transition-colors ${
+                className={`flex flex-col items-center justify-center gap-0.5 transition-colors flex-1 min-w-0 ${
                   active
                     ? 'text-[#C9A56B]'
                     : 'text-gray-500 dark:text-gray-400'
                 }`}
               >
-                <Icon size={20} strokeWidth={active ? 2.5 : 2} />
-                <span className="text-[10px] font-medium truncate max-w-full px-0.5">
+                <Icon size={18} strokeWidth={active ? 2.5 : 2} />
+                <span className="text-[9px] font-medium truncate w-full text-center px-0.5">
                   {link.label}
                 </span>
               </Link>
@@ -150,11 +150,11 @@ export function Header() {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="flex flex-col items-center justify-center gap-0.5 text-gray-500 dark:text-gray-400"
+            className="flex flex-col items-center justify-center gap-0.5 text-gray-500 dark:text-gray-400 flex-1 min-w-0"
             aria-label="Toggle theme"
           >
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            <span className="text-[10px] font-medium">
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            <span className="text-[9px] font-medium truncate w-full text-center">
               {theme === 'light' ? t('dark') : t('light')}
             </span>
           </button>
@@ -162,17 +162,14 @@ export function Header() {
           {/* Language Switcher */}
           <button
             onClick={switchLanguage}
-            className="flex flex-col items-center justify-center gap-0.5 text-gray-500 dark:text-gray-400"
+            className="flex flex-col items-center justify-center gap-0.5 text-gray-500 dark:text-gray-400 flex-1 min-w-0"
             aria-label="Switch language"
           >
-            <Globe size={20} />
-            <span className="text-[10px] font-medium uppercase">{locale}</span>
+            <Globe size={18} />
+            <span className="text-[9px] font-medium uppercase truncate w-full text-center">{locale}</span>
           </button>
         </div>
       </nav>
-
-      {/* Spacer for mobile bottom nav */}
-      <div className="lg:hidden h-16" />
     </>
   );
 }

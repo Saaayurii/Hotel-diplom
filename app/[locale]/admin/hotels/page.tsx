@@ -1,7 +1,5 @@
 'use client';
 
-export const revalidate = 0;
-
 import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Plus, Edit, Trash2, MapPin, Star, Search, SlidersHorizontal, ChevronDown } from 'lucide-react';
@@ -140,8 +138,8 @@ export default function HotelsPage() {
             </select>
             <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
           </div>
-          <Button variant="primary" onClick={handleCreate} className="flex-shrink-0">
-            <Plus size={20} className="mr-2" />
+          <Button variant="primary" onClick={handleCreate} className="flex-shrink-0 w-full sm:w-auto">
+            <Plus size={20} />
             {t('addHotel')}
           </Button>
         </div>

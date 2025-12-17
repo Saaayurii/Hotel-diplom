@@ -115,17 +115,21 @@ export default function LoginPage() {
       <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white dark:bg-gray-900">
         <div className="w-full max-w-md">
 
-          <div className="flex justify-between items-center mb-12">
-            <Link
-              href={`/${locale}`}
-              className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] transition-colors text-sm"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              {tCommon('goBack')}
-            </Link>
-            <Logo />
+          <div className="mb-12">
+            <div className="flex justify-center mb-6">
+              <Logo />
+            </div>
+            <div className="flex justify-center">
+              <Link
+                href={`/${locale}`}
+                className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] transition-colors text-sm"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                {tCommon('goBack')}
+              </Link>
+            </div>
           </div>
 
           <div className="text-center mb-8">

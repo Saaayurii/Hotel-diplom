@@ -103,88 +103,57 @@ export default function RoomsPage() {
       <Header />
 
       <main className="flex-grow">
-        {/* Hero Section - Elegant split design */}
-        <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-          {/* Left side - Content */}
-          <div className="w-full lg:w-1/2 relative z-10 py-20 lg:py-32">
-            <div className="container mx-auto px-4 lg:px-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A56B]/10 border border-[#C9A56B]/20 text-[#C9A56B] text-sm font-medium mb-6">
-                <BedDouble className="w-4 h-4" />
+        {/* Hero Section - Unique design matching hotels page */}
+        <section className="relative py-24 lg:py-32 overflow-hidden">
+          {/* Animated background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-gray-900 to-purple-900">
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute top-20 left-10 w-72 h-72 bg-[#C9A56B] rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+              <div className="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+            </div>
+            {/* Grid pattern */}
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }} />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center max-w-4xl mx-auto">
+              {/* Floating badge */}
+              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-8 animate-bounce" style={{ animationDuration: '3s' }}>
+                <BedDouble className="w-4 h-4 text-[#C9A56B]" />
                 {t('premiumRooms')}
+                <Sparkles className="w-4 h-4 text-[#C9A56B]" />
               </div>
 
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-                {t('heroTitle')}
-                <span className="block text-[#C9A56B]">{t('heroTitleHighlight')}</span>
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                {t('heroTitle')}{' '}
+                <span className="text-[#C9A56B]">{t('heroTitleHighlight')}</span>
               </h1>
 
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg">
+              <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
                 {t('heroSubtitle')}
               </p>
 
-              {/* Quick Stats */}
-              <div className="flex flex-wrap gap-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#C9A56B]/10 flex items-center justify-center">
-                    <BedDouble className="w-6 h-6 text-[#C9A56B]" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">{rooms.length}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('totalRooms')}</div>
-                  </div>
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="text-3xl font-bold text-white mb-1">{rooms.length}</div>
+                  <div className="text-sm text-gray-300">{t('totalRooms')}</div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                    <Check className="w-6 h-6 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">{rooms.filter(r => r.isAvailable).length}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('availableNow')}</div>
-                  </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="text-3xl font-bold text-white mb-1">{rooms.filter(r => r.isAvailable).length}</div>
+                  <div className="text-sm text-gray-300">{t('availableNow')}</div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                    <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">{roomTypes.length}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('roomTypes')}</div>
-                  </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 col-span-2 md:col-span-1">
+                  <div className="text-3xl font-bold text-white mb-1">{roomTypes.length}</div>
+                  <div className="text-sm text-gray-300">{t('roomTypes')}</div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Right side - Visual */}
-          <div className="hidden lg:block absolute top-0 right-0 w-1/2 h-full">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#C9A56B] via-[#B89560] to-[#8B7355]">
-              {/* Decorative patterns */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-10 right-10 w-40 h-40 border-2 border-white rounded-full" />
-                <div className="absolute bottom-20 right-20 w-60 h-60 border-2 border-white rounded-full" />
-                <div className="absolute top-1/2 right-1/3 w-32 h-32 border-2 border-white rounded-full" />
-              </div>
-
-              {/* Feature cards floating */}
-              <div className="absolute top-20 right-20 bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/30 animate-bounce" style={{ animationDuration: '4s' }}>
-                <Wifi className="w-8 h-8 text-white" />
-              </div>
-              <div className="absolute bottom-32 right-32 bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/30 animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
-                <Bath className="w-8 h-8 text-white" />
-              </div>
-              <div className="absolute top-1/2 right-10 bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/30 animate-bounce" style={{ animationDuration: '6s', animationDelay: '2s' }}>
-                <Coffee className="w-8 h-8 text-white" />
-              </div>
-
-              {/* Large bed icon */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <BedDouble className="w-48 h-48 text-white/20" />
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile background */}
-          <div className="absolute inset-0 lg:hidden bg-gradient-to-b from-[#C9A56B]/5 to-transparent -z-10" />
         </section>
 
         {/* Room Features Showcase */}
@@ -221,7 +190,7 @@ export default function RoomsPage() {
         </section>
 
         {/* Search and Filters */}
-        <section className="py-8 sticky top-0 z-30 bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <section className="py-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
               {/* Search */}

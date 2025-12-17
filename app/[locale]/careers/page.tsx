@@ -3,6 +3,8 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Briefcase, Users, Heart, Coffee, ArrowRight, Building, Award, TrendingUp } from 'lucide-react';
+import { Header } from '@/app/components/ui/Header';
+import { Footer } from '@/app/components/ui/Footer';
 
 const CareersPage = () => {
   const t = useTranslations('Careers');
@@ -71,9 +73,12 @@ const CareersPage = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-200">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] bg-cover bg-center" style={{ backgroundImage: "url('/4.jpg')" }}>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+
+      <main className="flex-grow bg-white dark:bg-black text-gray-800 dark:text-gray-200">
+        {/* Hero Section */}
+        <section className="relative h-[60vh] bg-cover bg-center" style={{ backgroundImage: "url('/4.jpg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-4">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
             {t('hero.title')}
@@ -156,6 +161,9 @@ const CareersPage = () => {
           </button>
         </div>
       </section>
+      </main>
+
+      <Footer />
     </div>
   );
 };

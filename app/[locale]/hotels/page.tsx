@@ -46,11 +46,20 @@ export default function HotelsPage() {
 
   const fetchHotels = async () => {
     try {
-      const res = await fetch('/api/admin/hotels');
+      const res = await fetch('/api/hotels');
       const data = await res.json();
-      setHotels(data.filter((h: Hotel) => h.isActive));
+
+      // Check if the response is an array (successful response)
+      if (Array.isArray(data)) {
+        setHotels(data);
+      } else {
+        // Handle error responses
+        console.error('Error fetching hotels:', data.error || 'Unknown error');
+        setHotels([]);
+      }
     } catch (error) {
       console.error('Error fetching hotels:', error);
+      setHotels([]);
     } finally {
       setLoading(false);
     }
