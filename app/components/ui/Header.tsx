@@ -49,6 +49,7 @@ export function Header() {
     { href: `/${locale}/rooms`, label: t('rooms'), icon: DoorOpen },
     { href: `/${locale}/about`, label: t('about'), icon: Info },
     { href: `/${locale}/contact`, label: t('contact'), icon: Phone },
+    { href: `/${locale}/press`, label: t('press'), icon: Info },
   ];
 
   const isActive = (href: string) => {
