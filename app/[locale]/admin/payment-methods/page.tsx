@@ -114,8 +114,8 @@ export default function PaymentMethodsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-serif text-black mb-2">{t('title')}</h1>
-          <p className="text-gray-600">{t('subtitle')}</p>
+          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">{t('title')}</h1>
+          <p className="text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
         </div>
         <Button variant="primary" onClick={() => openModal()}>
           <Plus size={20} className="mr-2" />
@@ -123,45 +123,45 @@ export default function PaymentMethodsPage() {
         </Button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   {t('name')}
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   {t('description')}
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Status
                 </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900 dark:text-white">
                   {tCommon('actions')}
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {paymentMethods.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan={4} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                     {tCommon('noData')}
                   </td>
                 </tr>
               ) : (
                 paymentMethods.map((method) => (
-                  <tr key={method.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 font-medium text-gray-900">{method.name}</td>
-                    <td className="px-6 py-4 text-gray-600 max-w-md truncate">
+                  <tr key={method.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{method.name}</td>
+                    <td className="px-6 py-4 text-gray-600 dark:text-gray-400 max-w-md truncate">
                       {method.description || '-'}
                     </td>
                     <td className="px-6 py-4">
                       <span
                         className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                           method.isActive
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-red-100 text-red-800'
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
                         }`}
                       >
                         {method.isActive ? t('active') : t('inactive')}
@@ -171,13 +171,13 @@ export default function PaymentMethodsPage() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openModal(method)}
-                          className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors"
+                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                         >
                           <Edit size={18} />
                         </button>
                         <button
                           onClick={() => handleDelete(method.id)}
-                          className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                         >
                           <Trash2 size={18} />
                         </button>
@@ -214,9 +214,9 @@ export default function PaymentMethodsPage() {
               type="checkbox"
               id="isActive"
               {...register('isActive')}
-              className="w-4 h-4 border-gray-300 rounded text-[#C9A56B] focus:ring-[#C9A56B]"
+              className="w-4 h-4 border-gray-300 dark:border-gray-600 rounded text-[#C9A56B] focus:ring-[#C9A56B]"
             />
-            <label htmlFor="isActive" className="text-sm font-medium text-gray-700">
+            <label htmlFor="isActive" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('active')}
             </label>
           </div>

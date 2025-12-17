@@ -73,8 +73,8 @@ export default function DiscountsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-serif text-black mb-2">Discounts Management</h1>
-          <p className="text-gray-600">Manage discount codes and promotions</p>
+          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">Discounts Management</h1>
+          <p className="text-gray-600 dark:text-gray-400">Manage discount codes and promotions</p>
         </div>
         <Link href="/admin/discounts/new">
           <Button variant="primary">
@@ -86,34 +86,34 @@ export default function DiscountsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {discounts.length === 0 ? (
-          <div className="col-span-2 bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center text-gray-500">
+          <div className="col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-12 text-center text-gray-500 dark:text-gray-400">
             No discounts found. Add your first discount to get started.
           </div>
         ) : (
           discounts.map((discount) => (
             <div
               key={discount.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <Tag size={20} className="text-[#C9A56B]" />
-                    <h3 className="text-xl font-bold text-gray-900">{discount.code}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{discount.code}</h3>
                   </div>
                   {discount.description && (
-                    <p className="text-gray-600 mb-3">{discount.description}</p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">{discount.description}</p>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
                   <Link href={`/admin/discounts/${discount.id}`}>
-                    <button className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors">
+                    <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                       <Edit size={18} />
                     </button>
                   </Link>
                   <button
                     onClick={() => handleDelete(discount.id)}
-                    className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -122,23 +122,23 @@ export default function DiscountsPage() {
 
               <div className="space-y-2 mb-4">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Discount Value:</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-gray-600 dark:text-gray-400">Discount Value:</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">
                     {discount.type === 'PERCENTAGE'
                       ? `${Number(discount.value)}%`
                       : `$${Number(discount.value)}`}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Usage:</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-gray-600 dark:text-gray-400">Usage:</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">
                     {discount.usedCount}
                     {discount.maxUses ? ` / ${discount.maxUses}` : ' / Unlimited'}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
                 <Calendar size={14} />
                 <span>
                   {formatDate(discount.validFrom)} - {formatDate(discount.validUntil)}
@@ -149,8 +149,8 @@ export default function DiscountsPage() {
                 <span
                   className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                     discount.isActive && !isExpired(discount.validUntil)
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-red-100 text-red-800'
+                      ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
+                      : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
                   }`}
                 >
                   {discount.isActive
@@ -160,7 +160,7 @@ export default function DiscountsPage() {
                     : 'Inactive'}
                 </span>
                 {discount.type && (
-                  <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                  <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400">
                     {discount.type}
                   </span>
                 )}

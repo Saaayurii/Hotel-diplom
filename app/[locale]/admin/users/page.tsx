@@ -49,9 +49,9 @@ export default function UsersPage() {
 
   const getRoleBadge = (role: string) => {
     const colors = {
-      ADMIN: 'bg-red-100 text-red-800',
-      MANAGER: 'bg-blue-100 text-blue-800',
-      CUSTOMER: 'bg-gray-100 text-gray-800',
+      ADMIN: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400',
+      MANAGER: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400',
+      CUSTOMER: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300',
     };
     return colors[role as keyof typeof colors] || colors.CUSTOMER;
   };
@@ -68,56 +68,56 @@ export default function UsersPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-serif text-black mb-2">Users Management</h1>
-          <p className="text-gray-600">View and manage all users</p>
+          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">Users Management</h1>
+          <p className="text-gray-600 dark:text-gray-400">View and manage all users</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   User
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Contact
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Role
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Bookings
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Reviews
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Joined
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   Status
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {users.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                     No users found.
                   </td>
                 </tr>
               ) : (
                 users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
+                  <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                     <td className="px-6 py-4">
                       <div>
-                        <div className="font-semibold text-gray-900">
+                        <div className="font-semibold text-gray-900 dark:text-white">
                           {user.firstName} {user.lastName}
                         </div>
                         {user.dateOfBirth && (
-                          <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
+                          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 mt-1">
                             <Calendar size={12} />
                             <span>Born {formatDate(user.dateOfBirth)}</span>
                           </div>
@@ -126,12 +126,12 @@ export default function UsersPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div>
-                        <div className="flex items-center gap-2 text-sm text-gray-900">
+                        <div className="flex items-center gap-2 text-sm text-gray-900 dark:text-white">
                           <Mail size={14} />
                           <span>{user.email}</span>
                         </div>
                         {user.phone && (
-                          <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
+                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mt-1">
                             <Phone size={14} />
                             <span>{user.phone}</span>
                           </div>
@@ -151,13 +151,13 @@ export default function UsersPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-gray-900">{user._count.bookings}</span>
+                      <span className="text-gray-900 dark:text-white">{user._count.bookings}</span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-gray-900">{user._count.reviews}</span>
+                      <span className="text-gray-900 dark:text-white">{user._count.reviews}</span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
                         {formatDate(user.createdAt)}
                       </span>
                     </td>
@@ -165,8 +165,8 @@ export default function UsersPage() {
                       <span
                         className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                           user.isActive
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-red-100 text-red-800'
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
                         }`}
                       >
                         {user.isActive ? 'Active' : 'Inactive'}

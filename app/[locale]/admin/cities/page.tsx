@@ -130,8 +130,8 @@ export default function CitiesPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-serif text-black mb-2">{t('title')}</h1>
-          <p className="text-gray-600">{t('subtitle')}</p>
+          <h1 className="text-3xl font-serif text-black dark:text-white mb-2">{t('title')}</h1>
+          <p className="text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
         </div>
         <Button variant="primary" onClick={() => openModal()}>
           <Plus size={20} className="mr-2" />
@@ -139,47 +139,47 @@ export default function CitiesPage() {
         </Button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   {t('name')}
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">
                   {t('country')}
                 </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900 dark:text-white">
                   {tCommon('actions')}
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {cities.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan={3} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                     {tCommon('noData')}
                   </td>
                 </tr>
               ) : (
                 cities.map((city) => (
-                  <tr key={city.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 font-medium text-gray-900">{city.name}</td>
-                    <td className="px-6 py-4 text-gray-600">
+                  <tr key={city.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{city.name}</td>
+                    <td className="px-6 py-4 text-gray-600 dark:text-gray-400">
                       {city.country.name} ({city.country.code})
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openModal(city)}
-                          className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors"
+                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-[#C9A56B] hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                         >
                           <Edit size={18} />
                         </button>
                         <button
                           onClick={() => handleDelete(city.id)}
-                          className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                         >
                           <Trash2 size={18} />
                         </button>
