@@ -34,7 +34,7 @@ export default function Map({ address = 'Донецк', className = '' }: MapPro
 
   if (!isMounted) {
     return (
-      <div className={`bg-gradient-to-br from-[#C9A56B]/20 to-blue-500/20 flex items-center justify-center ${className}`}>
+      <div className={`bg-gray-800 flex items-center justify-center ${className}`}>
         <div className="animate-pulse text-gray-500">Загрузка карты...</div>
       </div>
     );
@@ -46,12 +46,14 @@ export default function Map({ address = 'Донецк', className = '' }: MapPro
         center={DONETSK_COORDS}
         zoom={13}
         scrollWheelZoom={true}
+        zoomControl={false}
+        attributionControl={false}
         className="w-full h-full z-0"
-        style={{ background: '#1f2937' }}
+        style={{ background: '#1a1a2e' }}
       >
+        {/* Минималистичные темные тайлы CartoDB */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
         <Marker position={DONETSK_COORDS} icon={customIcon}>
           <Popup className="custom-popup">
@@ -64,10 +66,8 @@ export default function Map({ address = 'Донецк', className = '' }: MapPro
         </Marker>
       </MapContainer>
 
-      {/* Overlay gradient для интеграции с дизайном */}
-      <div className="absolute inset-0 pointer-events-none rounded-t-3xl" style={{
-        background: 'linear-gradient(to bottom, transparent 90%, rgba(31, 41, 55, 0.3) 100%)'
-      }} />
+      {/* Золотая рамка по краю */}
+      <div className="absolute inset-0 pointer-events-none rounded-t-3xl border border-[#C9A56B]/20" />
     </div>
   );
 }

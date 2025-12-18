@@ -6,6 +6,7 @@ import { Header } from '@/app/components/ui/Header';
 import { Footer } from '@/app/components/ui/Footer';
 import { Search, Users, Maximize, Layers, BedDouble, Check, X, Wifi, Tv, Wind, Bath, Coffee, Utensils, Sparkles, SlidersHorizontal, Grid3X3, List } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLocale } from 'next-intl';
 
 interface Room {
@@ -104,8 +105,19 @@ export default function RoomsPage() {
       <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Hero Section - Unique design matching hotels page */}
         <section className="relative py-24 lg:py-32 overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/lamp-comfort-bed-pillow-fabric.jpg"
+              alt="Rooms background"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-gray-900/70 to-purple-900/80" />
+          </div>
           {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-gray-900 to-purple-900">
+          <div className="absolute inset-0">
             <div className="absolute inset-0 opacity-30">
               <div className="absolute top-20 left-10 w-72 h-72 bg-[#C9A56B] rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
               <div className="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />

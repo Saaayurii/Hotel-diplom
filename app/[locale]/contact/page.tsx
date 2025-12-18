@@ -5,7 +5,19 @@ import { useTranslations } from 'next-intl';
 import { Header } from '@/app/components/ui/Header';
 import { Footer } from '@/app/components/ui/Footer';
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare, ChevronDown, Globe, Headphones, CheckCircle, ArrowRight, Facebook, Twitter, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// Динамический импорт карты (только на клиенте)
+const Map = dynamic(() => import('@/app/components/ui/Map'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-64 bg-gradient-to-br from-[#C9A56B]/20 to-blue-500/20 flex items-center justify-center">
+      <div className="animate-pulse text-gray-500">Загрузка карты...</div>
+    </div>
+  ),
+});
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLocale } from 'next-intl';
 
 export default function ContactPage() {
@@ -103,7 +115,18 @@ export default function ContactPage() {
       <main className="flex-grow">
         {/* Hero Section - Modern split design */}
         <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/luxury-classic-modern-bedroom-suite-hotel.jpg"
+              alt="Contact background"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900/85 via-gray-800/80 to-gray-900/85" />
+          </div>
+          <div className="absolute inset-0">
             {/* Animated shapes */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#C9A56B]/20 rounded-full blur-3xl" />
@@ -338,25 +361,17 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Map Card */}
+                {/* Interactive Map Card */}
                 <div className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700">
-                  <div className="h-48 bg-gradient-to-br from-[#C9A56B]/20 to-blue-500/20 relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <MapPin className="w-12 h-12 text-[#C9A56B] mx-auto mb-2" />
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{t('map.placeholder')}</p>
-                      </div>
-                    </div>
-                    {/* Fake map elements */}
-                    <div className="absolute inset-0 opacity-30">
-                      <div className="absolute top-4 left-4 w-16 h-16 border-2 border-gray-400 rounded-lg" />
-                      <div className="absolute bottom-4 right-4 w-24 h-12 border-2 border-gray-400 rounded-lg" />
-                      <div className="absolute top-1/2 left-1/3 w-8 h-8 border-2 border-gray-400 rounded-full" />
-                    </div>
-                  </div>
+                  <Map
+                    address={t('info.addressValue')}
+                    className="h-64 rounded-t-3xl"
+                  />
                   <div className="p-4">
                     <a
-                      href="#"
+                      href="https://www.openstreetmap.org/?mlat=48.0159&mlon=37.8030#map=14/48.0159/37.8030"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-[#C9A56B] text-[#C9A56B] font-medium hover:bg-[#C9A56B] hover:text-white transition-all"
                     >
                       <MapPin className="w-4 h-4" />

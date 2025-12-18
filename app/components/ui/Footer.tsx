@@ -12,22 +12,22 @@ export function Footer() {
 
   const footerLinks = {
     company: [
-      { href: `/${locale}/about`, label: 'About Us' },
-      { href: `/${locale}/careers`, label: 'Careers' },
-      { href: `/${locale}/press`, label: 'Press' },
-      { href: `/${locale}/blog`, label: 'Blog' },
+      { href: `/${locale}/about`, label: t('aboutUs') },
+      { href: `/${locale}/careers`, label: t('careers') },
+      { href: `/${locale}/press`, label: t('press') },
+      { href: `/${locale}/blog`, label: t('blog') },
     ],
     support: [
-      { href: `/${locale}/help`, label: 'Help Center' },
-      { href: `/${locale}/contact`, label: 'Contact Us' },
-      { href: `/${locale}/faq`, label: 'FAQ' },
-      { href: `/${locale}/terms`, label: 'Terms of Service' },
+      { href: `/${locale}/help`, label: t('helpCenter') },
+      { href: `/${locale}/contact`, label: t('contactUs') },
+      { href: `/${locale}/faq`, label: t('faq') },
+      { href: `/${locale}/terms`, label: t('termsOfService') },
     ],
     destinations: [
-      { href: `/${locale}/hotels`, label: 'All Hotels' },
-      { href: `/${locale}/destinations/europe`, label: 'Europe' },
-      { href: `/${locale}/destinations/asia`, label: 'Asia' },
-      { href: `/${locale}/destinations/americas`, label: 'Americas' },
+      { href: `/${locale}/hotels`, label: t('allHotels') },
+      { href: `/${locale}/destinations/europe`, label: t('europe') },
+      { href: `/${locale}/destinations/asia`, label: t('asia') },
+      { href: `/${locale}/destinations/americas`, label: t('americas') },
     ],
   };
 
@@ -90,7 +90,7 @@ export function Footer() {
           {/* Links Sections */}
           <div className="lg:col-span-2">
             <h3 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Company
+              {t('company')}
             </h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
@@ -108,7 +108,7 @@ export function Footer() {
 
           <div className="lg:col-span-2">
             <h3 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Support
+              {t('support')}
             </h3>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
@@ -126,7 +126,7 @@ export function Footer() {
 
           <div className="lg:col-span-2">
             <h3 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Destinations
+              {t('destinations')}
             </h3>
             <ul className="space-y-3">
               {footerLinks.destinations.map((link) => (
@@ -145,7 +145,7 @@ export function Footer() {
           {/* Contact Info */}
           <div className="lg:col-span-2">
             <h3 className="font-serif text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Contact
+              {t('contact')}
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -168,7 +168,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
-              &copy; {new Date().getFullYear()} TIMEOUT Travel Agency. All rights reserved.
+              &copy; {new Date().getFullYear()} {t('copyright')}
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Link
@@ -181,13 +181,13 @@ export function Footer() {
                 href={`/${locale}/cookies`}
                 className="text-sm text-gray-600 hover:text-[#C9A56B] transition-colors dark:text-gray-400 dark:hover:text-[#C9A56B]"
               >
-                Cookie Policy
+                {t('cookiePolicy')}
               </Link>
               <Link
                 href={`/${locale}/sitemap`}
                 className="text-sm text-gray-600 hover:text-[#C9A56B] transition-colors dark:text-gray-400 dark:hover:text-[#C9A56B]"
               >
-                Sitemap
+                {t('sitemap')}
               </Link>
             </div>
           </div>
