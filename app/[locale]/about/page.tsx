@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Header } from '@/app/components/ui/Header';
 import { Footer } from '@/app/components/ui/Footer';
 import { Award, Users, Globe, Headphones, Star, Shield, Heart, Zap, Target, Compass, CheckCircle2, ArrowRight, Quote, Building, Calendar, TrendingUp, Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
@@ -89,9 +90,16 @@ export default function AboutPage() {
       <main className="flex-grow">
         {/* Hero Section - Cinematic style */}
         <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-          {/* Animated gradient background */}
+          {/* Background Image */}
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+            <Image
+              src="/vertical-aerial-shot-sea-waves-hitting-cliff.jpg"
+              alt="Dramatic ocean waves hitting cliff"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/70 to-gray-900/80" />
             <div className="absolute inset-0 opacity-40">
               <div className="absolute top-0 left-0 w-96 h-96 bg-[#C9A56B] rounded-full mix-blend-overlay filter blur-3xl animate-pulse" />
               <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-overlay filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
@@ -195,17 +203,32 @@ export default function AboutPage() {
               </div>
 
               <div className="order-1 lg:order-2 relative">
-                {/* Decorative image composition */}
+                {/* Image composition with administrator */}
                 <div className="relative h-[500px]">
-                  <div className="absolute top-0 right-0 w-3/4 h-3/4 rounded-3xl bg-gradient-to-br from-[#C9A56B] to-[#B89560] shadow-2xl">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Building className="w-32 h-32 text-white/20" />
-                    </div>
+                  <div className="absolute top-0 right-0 w-3/4 h-3/4 rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/zensina-administrator-v-elegantnom-kostume-v-rabocee-vrema.jpg"
+                      alt="Professional administrator"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <div className="absolute bottom-0 left-0 w-2/3 h-2/3 rounded-3xl bg-gray-900 dark:bg-gray-800 shadow-2xl">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Globe className="w-24 h-24 text-[#C9A56B]/30" />
-                    </div>
+                  <div className="absolute bottom-0 left-0 w-2/3 h-2/3 rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/milaa-devuska-citaet-knigu-v-gamake-v-sadu.jpg"
+                      alt="Relaxing at resort"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  {/* Hotel sign image */}
+                  <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-2xl overflow-hidden shadow-xl border-4 border-white dark:border-gray-800 z-20">
+                    <Image
+                      src="/hotel-sign.jpg"
+                      alt="Hotel sign"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   {/* Floating card */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-2xl z-10">

@@ -101,24 +101,21 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Hero Image Area - Decorative */}
+              {/* Hero Image Area */}
               <div className="hidden lg:block relative">
                 <div className="relative aspect-square max-w-lg mx-auto">
                   {/* Decorative Circle */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#C9A56B]/20 to-transparent" />
 
-                  {/* Image Placeholder with Beach/Travel Theme */}
-                  <div className="absolute inset-8 rounded-2xl bg-gradient-to-br from-blue-100 to-amber-50 dark:from-blue-900/30 dark:to-amber-900/30 overflow-hidden shadow-2xl">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm mb-4">
-                          <MapPin className="w-16 h-16 text-[#C9A56B]" />
-                        </div>
-                        <p className="text-lg font-serif italic text-gray-600 dark:text-gray-400">
-                          Your next adventure<br />awaits
-                        </p>
-                      </div>
-                    </div>
+                  {/* Main Resort Image */}
+                  <div className="absolute inset-8 rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/tip-razvlekatel-nyi-kompleks-popularnyi-kurort-s-basseinami-i-akvaparkami-v-turcii-kotoryi-posesaut-bolee-5-millionov-celovek-v-god-amara-dol-ce-vita-roskosnyi-otel-kurort-tekirova-kemer.jpg"
+                      alt="Luxury resort with pool"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
                   </div>
 
                   {/* Floating Badge */}
@@ -497,7 +494,17 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#C9A56B] to-[#B89560] relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/beautiful-landscape-mother-nature.jpg"
+              alt="Beautiful landscape"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#C9A56B]/90 to-[#B89560]/90" />
+          </div>
           {/* Decorative Elements */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 right-10">

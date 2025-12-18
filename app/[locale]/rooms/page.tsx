@@ -99,10 +99,9 @@ export default function RoomsPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <>
       <Header />
-
-      <main className="flex-grow">
+      <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Hero Section - Unique design matching hotels page */}
         <section className="relative py-24 lg:py-32 overflow-hidden">
           {/* Animated background */}
@@ -192,9 +191,10 @@ export default function RoomsPage() {
         {/* Search and Filters */}
         <section className="py-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            {/* Search Row */}
+            <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
               {/* Search */}
-              <div className="relative flex-1 max-w-xl w-full">
+              <div className="relative flex-1">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
@@ -205,41 +205,18 @@ export default function RoomsPage() {
                 />
               </div>
 
-              {/* Filters Toggle & View Mode */}
-              <div className="flex items-center gap-4 w-full lg:w-auto">
+              {/* Mobile: Filters Toggle & View Mode */}
+              <div className="flex items-center gap-2 sm:gap-4">
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className={`flex items-center gap-2 px-4 py-3 rounded-xl border transition-all ${showFilters ? 'bg-[#C9A56B] text-white border-[#C9A56B]' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'}`}
+                  className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all ${showFilters ? 'bg-[#C9A56B] text-white border-[#C9A56B]' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'}`}
                 >
                   <SlidersHorizontal className="w-5 h-5" />
-                  {t('filters')}
+                  <span className="sm:inline">{t('filters')}</span>
                 </button>
 
-                <select
-                  value={typeFilter}
-                  onChange={(e) => setTypeFilter(e.target.value)}
-                  className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
-                >
-                  <option value="">{t('allTypes')}</option>
-                  {roomTypes.map((type) => (
-                    <option key={type.id} value={type.id}>
-                      {type.name}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={availabilityFilter}
-                  onChange={(e) => setAvailabilityFilter(e.target.value)}
-                  className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
-                >
-                  <option value="all">{t('allAvailability')}</option>
-                  <option value="available">{t('availableOnly')}</option>
-                  <option value="unavailable">{t('unavailableOnly')}</option>
-                </select>
-
                 {/* View Mode Toggle */}
-                <div className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-gray-200 dark:bg-gray-700">
+                <div className="flex items-center gap-1 p-1 rounded-xl bg-gray-200 dark:bg-gray-700">
                   <button
                     onClick={() => setViewMode('grid')}
                     className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-gray-600 shadow' : ''}`}
@@ -254,6 +231,32 @@ export default function RoomsPage() {
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* Expandable Filters */}
+            <div className={`grid gap-3 overflow-hidden transition-all duration-300 ${showFilters ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-4 max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <select
+                value={typeFilter}
+                onChange={(e) => setTypeFilter(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
+              >
+                <option value="">{t('allTypes')}</option>
+                {roomTypes.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.name}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                value={availabilityFilter}
+                onChange={(e) => setAvailabilityFilter(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
+              >
+                <option value="all">{t('allAvailability')}</option>
+                <option value="available">{t('availableOnly')}</option>
+                <option value="unavailable">{t('unavailableOnly')}</option>
+              </select>
             </div>
 
             {/* Results count */}
@@ -461,8 +464,7 @@ export default function RoomsPage() {
           </div>
         </section>
       </main>
-
       <Footer />
-    </div>
+    </>
   );
 }

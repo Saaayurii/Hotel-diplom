@@ -87,10 +87,10 @@ export default function HotelsPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <>
       <Header />
 
-      <main className="flex-grow">
+      <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Hero Section - Unique design with floating elements */}
         <section className="relative py-24 lg:py-32 overflow-hidden">
           {/* Animated background */}
@@ -328,6 +328,6 @@ export default function HotelsPage() {
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }

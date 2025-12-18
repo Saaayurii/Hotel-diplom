@@ -32,7 +32,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 border-t border-gray-200 dark:border-gray-800">
+    <footer className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 border-t border-gray-200 dark:border-gray-800 pb-20 lg:pb-0">
       {/* Decorative top border */}
       <div className="h-1 bg-gradient-to-r from-transparent via-[#C9A56B] to-transparent" />
 
