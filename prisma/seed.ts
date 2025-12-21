@@ -166,6 +166,117 @@ async function main() {
     },
   });
 
+  // 11. Create Hotel Images
+  console.log('🖼️ Creating hotel images...');
+
+  // Moscow Hotel Images
+  await prisma.hotelImage.createMany({
+    data: [
+      {
+        hotelId: moscowHotel.id,
+        url: '/luxury-classic-modern-bedroom-suite-hotel.jpg',
+        caption: 'Luxury Suite',
+        isPrimary: true,
+        displayOrder: 0,
+      },
+      {
+        hotelId: moscowHotel.id,
+        url: '/lamp-comfort-bed-pillow-fabric.jpg',
+        caption: 'Comfortable Room',
+        isPrimary: false,
+        displayOrder: 1,
+      },
+      {
+        hotelId: moscowHotel.id,
+        url: '/1.jpg',
+        caption: 'Hotel Exterior',
+        isPrimary: false,
+        displayOrder: 2,
+      },
+    ],
+  });
+
+  // SPB Hotel Images
+  await prisma.hotelImage.createMany({
+    data: [
+      {
+        hotelId: spbHotel.id,
+        url: '/2.jpg',
+        caption: 'Hotel View',
+        isPrimary: true,
+        displayOrder: 0,
+      },
+      {
+        hotelId: spbHotel.id,
+        url: '/beautiful-landscape-mother-nature.jpg',
+        caption: 'Beautiful Landscape',
+        isPrimary: false,
+        displayOrder: 1,
+      },
+      {
+        hotelId: spbHotel.id,
+        url: '/vertical-aerial-shot-sea-waves-hitting-cliff.jpg',
+        caption: 'Sea View',
+        isPrimary: false,
+        displayOrder: 2,
+      },
+    ],
+  });
+
+  // NY Hotel Images
+  await prisma.hotelImage.createMany({
+    data: [
+      {
+        hotelId: nyHotel.id,
+        url: '/3.jpg',
+        caption: 'Modern Luxury',
+        isPrimary: true,
+        displayOrder: 0,
+      },
+      {
+        hotelId: nyHotel.id,
+        url: '/4.jpg',
+        caption: 'City Views',
+        isPrimary: false,
+        displayOrder: 1,
+      },
+      {
+        hotelId: nyHotel.id,
+        url: '/5.jpg',
+        caption: 'Premium Amenities',
+        isPrimary: false,
+        displayOrder: 2,
+      },
+    ],
+  });
+
+  // Paris Hotel Images
+  await prisma.hotelImage.createMany({
+    data: [
+      {
+        hotelId: parisHotel.id,
+        url: '/tip-razvlekatel-nyi-kompleks-popularnyi-kurort-s-basseinami-i-akvaparkami-v-turcii-kotoryi-posesaut-bolee-5-millionov-celovek-v-god-amara-dol-ce-vita-roskosnyi-otel-kurort-tekirova-kemer.jpg',
+        caption: 'Resort Complex',
+        isPrimary: true,
+        displayOrder: 0,
+      },
+      {
+        hotelId: parisHotel.id,
+        url: '/hammocks-with-palm-trees.jpg',
+        caption: 'Relaxation Area',
+        isPrimary: false,
+        displayOrder: 1,
+      },
+      {
+        hotelId: parisHotel.id,
+        url: '/milaa-devuska-citaet-knigu-v-gamake-v-sadu.jpg',
+        caption: 'Garden Hammock',
+        isPrimary: false,
+        displayOrder: 2,
+      },
+    ],
+  });
+
   // 4. Create Room Types
   console.log('🛏️ Creating room types...');
   const standard = await prisma.roomType.create({
@@ -300,41 +411,41 @@ async function main() {
   console.log('📋 Creating booking statuses...');
   const pending = await prisma.bookingStatus.create({
     data: {
-      name: 'PENDING',
-      description: 'Booking is pending confirmation',
-      color: '#FFA500',
+      name: 'Pending',
+      description: 'Booking is awaiting confirmation',
+      color: '#F59E0B',
     },
   });
 
   const confirmed = await prisma.bookingStatus.create({
     data: {
-      name: 'CONFIRMED',
-      description: 'Booking is confirmed',
-      color: '#4CAF50',
-    },
-  });
-
-  const checkedIn = await prisma.bookingStatus.create({
-    data: {
-      name: 'CHECKED_IN',
-      description: 'Guest has checked in',
-      color: '#2196F3',
-    },
-  });
-
-  const checkedOut = await prisma.bookingStatus.create({
-    data: {
-      name: 'CHECKED_OUT',
-      description: 'Guest has checked out',
-      color: '#9E9E9E',
+      name: 'Confirmed',
+      description: 'Booking has been confirmed',
+      color: '#10B981',
     },
   });
 
   const cancelled = await prisma.bookingStatus.create({
     data: {
-      name: 'CANCELLED',
-      description: 'Booking was cancelled',
-      color: '#F44336',
+      name: 'Cancelled',
+      description: 'Booking has been cancelled',
+      color: '#EF4444',
+    },
+  });
+
+  const completed = await prisma.bookingStatus.create({
+    data: {
+      name: 'Completed',
+      description: 'Stay has been completed',
+      color: '#6366F1',
+    },
+  });
+
+  const rejected = await prisma.bookingStatus.create({
+    data: {
+      name: 'Rejected',
+      description: 'Booking was rejected',
+      color: '#EF4444',
     },
   });
 
@@ -417,10 +528,11 @@ async function main() {
   console.log('  - Countries: 3');
   console.log('  - Cities: 4');
   console.log('  - Hotels: 4');
+  console.log('  - Hotel Images: 12 (3 per hotel)');
   console.log('  - Room Types: 4');
   console.log('  - Rooms: 14');
   console.log('  - Users: 4 (1 admin, 1 manager, 2 customers)');
-  console.log('  - Booking Statuses: 5');
+  console.log('  - Booking Statuses: 5 (Pending, Confirmed, Cancelled, Completed, Rejected)');
   console.log('  - Payment Methods: 5');
   console.log('  - Amenities: 15');
   console.log('  - Discounts: 3');
@@ -428,6 +540,7 @@ async function main() {
   console.log('  Admin: admin@timeout.com / admin123');
   console.log('  Manager: manager@timeout.com / user123');
   console.log('  Customer: ivan@example.com / user123');
+  console.log('  Customer: maria@example.com / user123');
 }
 
 main()

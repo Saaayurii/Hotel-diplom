@@ -27,6 +27,12 @@ interface Hotel {
       };
     };
   };
+  hotelImages: Array<{
+    id: string;
+    url: string;
+    caption: string | null;
+    isPrimary: boolean;
+  }>;
   _count: {
     rooms: number;
   };
@@ -248,10 +254,24 @@ export default function HotelsPage() {
                     <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 dark:border-gray-700">
                       {/* Image Area with gradient overlay */}
                       <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#C9A56B]/20 via-transparent to-purple-500/20" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Building className="w-20 h-20 text-[#C9A56B]/30 group-hover:scale-110 transition-transform duration-500" />
-                        </div>
+                        {hotel.hotelImages && hotel.hotelImages.length > 0 ? (
+                          <>
+                            <Image
+                              src={hotel.hotelImages[0].url}
+                              alt={hotel.hotelImages[0].caption || hotel.name}
+                              fill
+                              className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#C9A56B]/20 via-transparent to-purple-500/20" />
+                          </>
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#C9A56B]/20 via-transparent to-purple-500/20" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <Building className="w-20 h-20 text-[#C9A56B]/30 group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+                          </>
+                        )}
 
                         {/* Stars badge */}
                         <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm">

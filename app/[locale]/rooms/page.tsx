@@ -387,7 +387,7 @@ export default function RoomsPage() {
                         </Link>
                         {room.isAvailable && (
                           <Link
-                            href={`/${locale}/booking/${room.id}`}
+                            href={`/${locale}/book/${room.id}`}
                             className="flex-1 text-center py-3 rounded-xl bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all shadow-lg hover:shadow-xl"
                           >
                             {t('bookNow')}
@@ -460,7 +460,7 @@ export default function RoomsPage() {
                           </Link>
                           {room.isAvailable && (
                             <Link
-                              href={`/${locale}/booking/${room.id}`}
+                              href={`/${locale}/book/${room.id}`}
                               className="px-4 py-2 rounded-xl bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all"
                             >
                               {t('bookNow')}

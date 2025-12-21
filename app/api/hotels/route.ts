@@ -17,6 +17,12 @@ export async function GET() {
             },
           },
         },
+        hotelImages: {
+          where: {
+            isPrimary: true,
+          },
+          take: 1,
+        },
         _count: {
           select: {
             rooms: true,

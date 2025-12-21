@@ -1,4 +1,8 @@
-import { useTranslations } from 'next-intl';
+'use client';
+
+import { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { Header } from '../components/ui/Header';
 import { Footer } from '../components/ui/Footer';
 import Link from 'next/link';
@@ -7,6 +11,27 @@ import { Search, Calendar, Users, Star, Shield, Headphones, Award, MapPin, Compa
 
 export default function Home() {
   const t = useTranslations('HomePage');
+  const locale = useLocale();
+  const router = useRouter();
+  const [searchData, setSearchData] = useState({
+    destination: '',
+    checkIn: '',
+    checkOut: '',
+    guests: '1',
+  });
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Build query params
+    const params = new URLSearchParams();
+    if (searchData.destination) params.append('destination', searchData.destination);
+    if (searchData.checkIn) params.append('checkIn', searchData.checkIn);
+    if (searchData.checkOut) params.append('checkOut', searchData.checkOut);
+    if (searchData.guests) params.append('guests', searchData.guests);
+
+    router.push(`/${locale}/rooms${params.toString() ? '?' + params.toString() : ''}`);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -140,7 +165,7 @@ export default function Home() {
         <section id="search" className="py-12 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8">
+              <form onSubmit={handleSearch} className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8">
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
                   {t('search.title')}
                 </h2>
@@ -156,6 +181,8 @@ export default function Home() {
                       <input
                         type="text"
                         placeholder={t('search.destinationPlaceholder')}
+                        value={searchData.destination}
+                        onChange={(e) => setSearchData({ ...searchData, destination: e.target.value })}
                         className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
                       />
                     </div>
@@ -170,6 +197,9 @@ export default function Home() {
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                       <input
                         type="date"
+                        value={searchData.checkIn}
+                        onChange={(e) => setSearchData({ ...searchData, checkIn: e.target.value })}
+                        min={new Date().toISOString().split('T')[0]}
                         className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
                       />
                     </div>
@@ -184,6 +214,9 @@ export default function Home() {
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                       <input
                         type="date"
+                        value={searchData.checkOut}
+                        onChange={(e) => setSearchData({ ...searchData, checkOut: e.target.value })}
+                        min={searchData.checkIn || new Date().toISOString().split('T')[0]}
                         className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all"
                       />
                     </div>
@@ -196,21 +229,26 @@ export default function Home() {
                     </label>
                     <div className="relative">
                       <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                      <select className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all appearance-none">
-                        <option>{t('search.guestsPlaceholder')}</option>
-                        <option>2 {t('search.guests')}</option>
-                        <option>3 {t('search.guests')}</option>
-                        <option>4+ {t('search.guests')}</option>
+                      <select
+                        value={searchData.guests}
+                        onChange={(e) => setSearchData({ ...searchData, guests: e.target.value })}
+                        className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#C9A56B] focus:border-transparent outline-none transition-all appearance-none"
+                      >
+                        <option value="1">1 {t('search.guests')}</option>
+                        <option value="2">2 {t('search.guests')}</option>
+                        <option value="3">3 {t('search.guests')}</option>
+                        <option value="4">4 {t('search.guests')}</option>
+                        <option value="5">5+ {t('search.guests')}</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
-                <button className="w-full mt-6 px-8 py-4 rounded-lg bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                <button type="submit" className="w-full mt-6 px-8 py-4 rounded-lg bg-[#C9A56B] text-white font-medium hover:bg-[#B89560] transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
                   <Search size={20} />
                   {t('search.searchHotels')}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </section>

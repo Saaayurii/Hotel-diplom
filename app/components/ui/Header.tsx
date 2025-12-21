@@ -6,7 +6,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Logo } from './Logo';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { Moon, Sun, User, Home, Building2, DoorOpen, Info, Phone, Globe, LifeBuoy, Briefcase } from 'lucide-react';
+import { Moon, Sun, User, Home, Building2, DoorOpen, Info, Phone, Globe, LifeBuoy, Briefcase, Calendar, LogOut } from 'lucide-react';
+
+interface UserInfo {
+  email: string;
+  role: string;
+  userId: string;
+}
 
 export function Header() {
   const locale = useLocale();
@@ -14,6 +20,8 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [user, setUser] = useState<UserInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Load theme from localStorage
@@ -27,7 +35,35 @@ export function Header() {
       setTheme(prefersDark ? 'dark' : 'light');
       document.documentElement.classList.toggle('dark', prefersDark);
     }
+
+    // Check if user is authenticated
+    fetchUser();
   }, []);
+
+  const fetchUser = async () => {
+    try {
+      const res = await fetch('/api/auth/me');
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      setUser(null);
+      router.push(`/${locale}`);
+      router.refresh();
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -92,13 +128,34 @@ export function Header() {
             {/* Right side - Actions & Controls */}
             <div className="flex items-center gap-3">
               {/* Login/Profile Button - Desktop */}
-              <Link
-                href={`/${locale}/auth/login`}
-                className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg bg-[#C9A56B] text-white hover:bg-[#B89560] transition-colors"
-              >
-                <User size={18} />
-                <span className="text-sm font-medium">{t('signIn')}</span>
-              </Link>
+              {!loading && (
+                user ? (
+                  <div className="hidden lg:flex items-center gap-2">
+                    <Link
+                      href={`/${locale}/profile/bookings`}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:border-[#C9A56B] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    >
+                      <Calendar size={18} />
+                      <span className="text-sm font-medium">{t('myBookings')}</span>
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#C9A56B] text-white hover:bg-[#B89560] transition-colors"
+                    >
+                      <LogOut size={18} />
+                      <span className="text-sm font-medium">{t('logout')}</span>
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href={`/${locale}/auth/login`}
+                    className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg bg-[#C9A56B] text-white hover:bg-[#B89560] transition-colors"
+                  >
+                    <User size={18} />
+                    <span className="text-sm font-medium">{t('signIn')}</span>
+                  </Link>
+                )
+              )}
 
               {/* Theme toggle - Desktop */}
               <button
