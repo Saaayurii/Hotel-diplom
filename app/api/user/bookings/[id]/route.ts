@@ -4,7 +4,7 @@ import { prisma } from '@/app/lib/prisma';
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -13,7 +13,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     // Find booking and verify ownership
     const booking = await prisma.booking.findUnique({

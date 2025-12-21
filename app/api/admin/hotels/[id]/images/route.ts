@@ -4,12 +4,13 @@ import { prisma } from '@/app/lib/prisma';
 // Get all images for a hotel
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const images = await prisma.hotelImage.findMany({
       where: {
-        hotelId: params.id,
+        hotelId: id,
       },
       orderBy: [
         { isPrimary: 'desc' },
@@ -30,9 +31,10 @@ export async function GET(
 // Add new image to hotel
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { url, caption, isPrimary, displayOrder } = body;
 
@@ -47,7 +49,7 @@ export async function POST(
     if (isPrimary) {
       await prisma.hotelImage.updateMany({
         where: {
-          hotelId: params.id,
+          hotelId: id,
           isPrimary: true,
         },
         data: {
@@ -58,7 +60,7 @@ export async function POST(
 
     const image = await prisma.hotelImage.create({
       data: {
-        hotelId: params.id,
+        hotelId: id,
         url,
         caption: caption || null,
         isPrimary: isPrimary || false,
