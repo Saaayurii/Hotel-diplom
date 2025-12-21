@@ -7,6 +7,8 @@ import { Input } from '@/app/components/ui/Input';
 import { Button } from '@/app/components/ui/Button';
 import { Logo } from '@/app/components/ui/Logo';
 
+export const dynamic = 'force-dynamic';
+
 interface LoginFormData {
   email: string;
   password: string;

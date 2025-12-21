@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar, User, Hotel as HotelIcon, Bed, DollarSign } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
-
 interface Booking {
   id: string;
   checkInDate: string;

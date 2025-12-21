@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Plus, Edit, Trash2, MapPin, Star } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 
+export const dynamic = 'force-dynamic';
+
 interface Hotel {
   id: string;
   name: string;

@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { Mail, Phone, Calendar, Shield } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
-
 interface User {
   id: string;
   email: string;

@@ -2,55 +2,60 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Edit, Trash2, Hotel as HotelIcon, DollarSign } from 'lucide-react';
+import { Plus, Edit, Trash2, MapPin, Star } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 
-export const dynamic = 'force-dynamic';
-
-interface Room {
+interface Hotel {
   id: string;
-  number: string;
-  floor: number;
-  size: number | null;
-  pricePerNight: string;
-  isAvailable: boolean;
-  hotel: {
-    name: string;
+  name: string;
+  description: string | null;
+  stars: number;
+  phone: string | null;
+  email: string | null;
+  isActive: boolean;
+  address: {
+    street: string;
+    building: string;
+    city: {
+      name: string;
+      country: {
+        name: string;
+      };
+    };
   };
-  roomType: {
-    name: string;
-    maxGuests: number;
+  _count: {
+    rooms: number;
   };
 }
 
-export default function RoomsPage() {
-  const [rooms, setRooms] = useState<Room[]>([]);
+export default function HotelsPage() {
+  const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchRooms();
+    fetchHotels();
   }, []);
 
-  const fetchRooms = async () => {
+  const fetchHotels = async () => {
     try {
-      const response = await fetch('/api/admin/rooms');
+      const response = await fetch('/api/admin/hotels');
       const data = await response.json();
-      setRooms(data);
+      setHotels(data);
     } catch (error) {
-      console.error('Error fetching rooms:', error);
+      console.error('Error fetching hotels:', error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this room?')) return;
+    if (!confirm('Are you sure you want to delete this hotel?')) return;
 
     try {
-      await fetch(`/api/admin/rooms/${id}`, { method: 'DELETE' });
-      fetchRooms();
+      await fetch(`/api/admin/hotels/${id}`, { method: 'DELETE' });
+      fetchHotels();
     } catch (error) {
-      console.error('Error deleting room:', error);
+      console.error('Error deleting hotel:', error);
     }
   };
 
@@ -66,13 +71,13 @@ export default function RoomsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-serif text-black mb-2">Rooms Management</h1>
-          <p className="text-gray-600">Manage your hotel rooms</p>
+          <h1 className="text-3xl font-serif text-black mb-2">Hotels Management</h1>
+          <p className="text-gray-600">Manage your hotels and properties</p>
         </div>
-        <Link href="/admin/rooms/new">
+        <Link href="/admin/hotels/new">
           <Button variant="primary">
             <Plus size={20} className="mr-2" />
-            Add Room
+            Add Hotel
           </Button>
         </Link>
       </div>
@@ -83,22 +88,19 @@ export default function RoomsPage() {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Room Number
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
                   Hotel
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Type
+                  Location
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Floor
+                  Stars
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Size
+                  Rooms
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Price/Night
+                  Contact
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
                   Status
@@ -109,68 +111,69 @@ export default function RoomsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {rooms.length === 0 ? (
+              {hotels.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-gray-500">
-                    No rooms found. Add your first room to get started.
+                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
+                    No hotels found. Add your first hotel to get started.
                   </td>
                 </tr>
               ) : (
-                rooms.map((room) => (
-                  <tr key={room.id} className="hover:bg-gray-50">
+                hotels.map((hotel) => (
+                  <tr key={hotel.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
-                      <div className="font-semibold text-gray-900">{room.number}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <HotelIcon size={16} />
-                        <span>{room.hotel.name}</span>
+                      <div>
+                        <div className="font-semibold text-gray-900">{hotel.name}</div>
+                        {hotel.description && (
+                          <div className="text-sm text-gray-500 line-clamp-1">
+                            {hotel.description}
+                          </div>
+                        )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div>
-                        <div className="text-gray-900">{room.roomType.name}</div>
-                        <div className="text-sm text-gray-500">
-                          Max {room.roomType.maxGuests} guests
+                      <div className="flex items-start gap-2 text-sm text-gray-600">
+                        <MapPin size={16} className="mt-0.5 flex-shrink-0" />
+                        <div>
+                          <div>{hotel.address.street} {hotel.address.building}</div>
+                          <div>{hotel.address.city.name}, {hotel.address.city.country.name}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-gray-900">{room.floor}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-gray-900">
-                        {room.size ? `${room.size} m²` : '-'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
                       <div className="flex items-center gap-1">
-                        <DollarSign size={16} className="text-gray-500" />
-                        <span className="font-semibold text-gray-900">
-                          {Number(room.pricePerNight).toFixed(2)}
-                        </span>
+                        <Star size={16} className="fill-[#C9A56B] text-[#C9A56B]" />
+                        <span className="font-medium">{hotel.stars}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="text-gray-900">{hotel._count.rooms}</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm">
+                        {hotel.email && <div className="text-gray-900">{hotel.email}</div>}
+                        {hotel.phone && <div className="text-gray-600">{hotel.phone}</div>}
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <span
                         className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                          room.isAvailable
+                          hotel.isActive
                             ? 'bg-green-100 text-green-800'
                             : 'bg-red-100 text-red-800'
                         }`}
                       >
-                        {room.isAvailable ? 'Available' : 'Unavailable'}
+                        {hotel.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
-                        <Link href={`/admin/rooms/${room.id}`}>
+                        <Link href={`/admin/hotels/${hotel.id}`}>
                           <button className="p-2 text-gray-600 hover:text-[#C9A56B] hover:bg-gray-100 rounded-lg transition-colors">
                             <Edit size={18} />
                           </button>
                         </Link>
                         <button
-                          onClick={() => handleDelete(room.id)}
+                          onClick={() => handleDelete(hotel.id)}
                           className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         >
                           <Trash2 size={18} />

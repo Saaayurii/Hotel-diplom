@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { Plus, Edit, Trash2, Hotel as HotelIcon, DollarSign } from 'lucide-react';
 import { Button } from '@/app/components/ui/Button';
 
-export const dynamic = 'force-dynamic';
-
 interface Room {
   id: string;
   number: string;
