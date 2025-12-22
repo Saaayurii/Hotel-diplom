@@ -20,14 +20,14 @@ export function Footer() {
     support: [
       { href: `/${locale}/help`, label: t('helpCenter') },
       { href: `/${locale}/contact`, label: t('contactUs') },
-      { href: `/${locale}/faq`, label: t('faq') },
-      { href: `/${locale}/terms`, label: t('termsOfService') },
+      { href: `/${locale}/help`, label: t('faq') },
+      { href: `/${locale}/privacy`, label: t('termsOfService') },
     ],
     destinations: [
       { href: `/${locale}/hotels`, label: t('allHotels') },
-      { href: `/${locale}/destinations/europe`, label: t('europe') },
-      { href: `/${locale}/destinations/asia`, label: t('asia') },
-      { href: `/${locale}/destinations/americas`, label: t('americas') },
+      { href: `/${locale}/rooms`, label: t('europe') },
+      { href: `/${locale}/rooms`, label: t('asia') },
+      { href: `/${locale}/rooms`, label: t('americas') },
     ],
   };
 
@@ -178,13 +178,13 @@ export function Footer() {
                 {t('privacyPolicy')}
               </Link>
               <Link
-                href={`/${locale}/cookies`}
+                href={`/${locale}/privacy`}
                 className="text-sm text-gray-600 hover:text-[#C9A56B] transition-colors dark:text-gray-400 dark:hover:text-[#C9A56B]"
               >
                 {t('cookiePolicy')}
               </Link>
               <Link
-                href={`/${locale}/sitemap`}
+                href={`/${locale}/hotels`}
                 className="text-sm text-gray-600 hover:text-[#C9A56B] transition-colors dark:text-gray-400 dark:hover:text-[#C9A56B]"
               >
                 {t('sitemap')}

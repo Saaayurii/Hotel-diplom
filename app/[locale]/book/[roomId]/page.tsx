@@ -60,7 +60,7 @@ export default function BookRoomPage() {
 
   const fetchRoom = async () => {
     try {
-      const res = await fetch(`/api/admin/rooms/${roomId}`);
+      const res = await fetch(`/api/rooms/${roomId}`);
       if (res.ok) {
         const data = await res.json();
         setRoom(data);
