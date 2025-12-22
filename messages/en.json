@@ -167,6 +167,37 @@
     "ctaSubtitle": "Contact our team for personalized recommendations and exclusive deals",
     "ctaButton": "Contact Us"
   },
+  "RoomDetail": {
+    "notFound": "Room Not Found",
+    "notFoundDesc": "The room you're looking for doesn't exist.",
+    "backToRooms": "Back to Rooms",
+    "room": "Room",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "aboutRoom": "About This Room",
+    "noDescription": "No description available.",
+    "maxGuests": "Max Guests",
+    "floor": "Floor",
+    "size": "Size",
+    "amenities": "Room Amenities",
+    "hotelInfo": "Hotel Information",
+    "viewHotel": "View Hotel",
+    "perNight": "per night",
+    "roomType": "Room Type",
+    "guests": "guests",
+    "status": "Status",
+    "bookNow": "Book Now",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "features": {
+      "wifi": "Free WiFi",
+      "tv": "Smart TV",
+      "ac": "Air Conditioning",
+      "bath": "Private Bathroom",
+      "minibar": "Mini Bar",
+      "roomService": "Room Service"
+    }
+  },
   "Rooms": {
     "title": "Available Rooms",
     "subtitle": "Find your perfect accommodation",
