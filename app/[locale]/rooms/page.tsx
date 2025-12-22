@@ -61,8 +61,8 @@ export default function RoomsPage() {
   const fetchData = async () => {
     try {
       const [roomsRes, typesRes] = await Promise.all([
-        fetch('/api/admin/rooms'),
-        fetch('/api/admin/room-types')
+        fetch('/api/rooms'),
+        fetch('/api/room-types')
       ]);
       const [roomsData, typesData] = await Promise.all([
         roomsRes.json(),
